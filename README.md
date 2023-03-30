@@ -1,5 +1,5 @@
 
-# Frontend of social media app
+# Frontend of Crabnet
 
 This is frontend of social media app project Crabnet
 
