@@ -8,6 +8,7 @@ interface User {
     posts: Array<PostInfo>
     followers: Array<string>
     following: Array<string>
+    bio: string
 }
 
 

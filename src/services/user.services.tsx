@@ -5,7 +5,7 @@ const API_URL = "http://localhost:8080/user";
 const FOLLOW_ENDPOINT = API_URL + "/follow";
 const UNFOLLOW_ENDPOINT = API_URL + "/unfollow";
 const ALL_USER_PATTERN_ENDPOINT = API_URL + "/all/";
-
+const BIO_ENDPOINT = API_URL + "/bio"
 
 class UserServices {
     async getSelfInfo() {
@@ -54,6 +54,13 @@ class UserServices {
     async unFollow(username: string) {
         return axios
         .post(UNFOLLOW_ENDPOINT + "/" + username, {}, {headers: {'Authorization': `Bearer ${TokenService.getToken()}`}})
+        .then(response => response)
+        .catch(error => error.response)
+    }
+
+    async updateBio(newBio: string) {
+        return axios
+        .post(BIO_ENDPOINT, {bio: newBio}, {headers: {'Authorization': `Bearer ${TokenService.getToken()}`}})
         .then(response => response)
         .catch(error => error.response)
     }

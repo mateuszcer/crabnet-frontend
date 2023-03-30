@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react'
+import { useLogout } from '../hooks/useLogout';
 import userServices from '../services/user.services';
 import User from '../types/UserInfo';
 
 export default function UserCard() {
     const [userInfo, setUserInfo] = useState<User>();
+    const {logout} = useLogout()
 
     useEffect(() => {
         const getUserInfo = async () => {
-          const { data: selfInfo } = await userServices.getSelfInfo()
-          setUserInfo(selfInfo)
+          const res = await userServices.getSelfInfo()
+          if(res.status == 200){
+            setUserInfo(res.data)
+          }
+          else if(res.status == 401) {
+            logout()
+        }
+          
         } 
         getUserInfo();
       }, [])
@@ -29,7 +37,7 @@ export default function UserCard() {
                             <div className="h6 text-muted">Following</div>
                             <div className="h5">{userInfo?.following.length}</div>
                         </li>
-                        <li className="list-group-item">Vestibulum at eros</li>
+                        <li className="list-group-item">{userInfo?.bio}</li>
                     </ul>
                 </div>
             </div>

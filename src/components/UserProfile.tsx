@@ -17,10 +17,35 @@ export default function UserProfile() {
     const [isMe, setIsMe] = useState<boolean>(false);
     const {username} = useParams();
     const {logout} = useLogout()
-
+    const [edit, setEdit] = useState<boolean>(false)
     const {handleFollow, handleUnfollow, error, followed} = useFollow(username || "")
-
-
+    const [content, setContent] = useState<string>("")
+    const [bioError, setBioError] = useState<string>()
+    const [bio, setBio] = useState<string>("")
+    const handleBioChange = async (e: any) => {
+      if(!edit){
+        setEdit(true)
+        return
+      }
+      if(content === bio) {
+        setEdit(false)
+        
+        return
+      }
+      const res = await userServices.updateBio(content)
+      if(res.status == 200) {
+        setEdit(false)
+        setBioError("")
+        if(userInfo) {
+          userInfo["bio"] = content
+        }
+        setBio(content)
+      }
+      else{
+        setBioError(res.data)
+      }
+      
+    }
     useEffect(() => {
         const getUserInfo = async () => {
           const res = await UserServices.getUserInfo(username || "")
@@ -32,8 +57,9 @@ export default function UserProfile() {
           if(res.data.username === AuthService.getUsername()){
             setIsMe(true)
           }
-          console.log(AuthService.getUsername(), res.data.username, res.data.username == AuthService.getUsername())
           setUserInfo(res.data)
+          setBio(res.data["bio"])
+          setContent(res.data["bio"])
         } 
         getUserInfo();
       }, [])
@@ -45,7 +71,7 @@ export default function UserProfile() {
     <section className="vh-100" style={{backgroundColor: "#eee"}}>
     <Navbar/>
   <div className="container py-5 h-100">
-    <div className="row d-flex justify-content-center align-items-center h-100">
+    <div className="row d-flex justify-content-center align-items-center">
       <div className="col-md-12 col-xl-4">
 
         <div className="card" style={{borderRadius: "15px"}}>
@@ -55,28 +81,32 @@ export default function UserProfile() {
                 className="rounded-circle img-fluid" style={{width: "100px"}} />
             </div>
             <h4 className="mb-2">{userInfo?.firstname} {userInfo?.lastname}</h4>
-            <p className="text-muted mb-4">@{userInfo?.username}</p>
-
+            <p className="text-muted mb-3">@{userInfo?.username}</p>
+            {edit ? 
+            <textarea  onChange={e => setContent(e.target.value)} className="form-control mb-4" defaultValue={bio}></textarea>
+            :
+            <p className="text-muted mb-4 h6">{bio}</p>
+          }
             {
               isMe ?
-              <button  type="button" className="btn btn-primary btn-rounded btn-lg">
-              Edit bio
+              <button  onClick={handleBioChange} type="button" className="btn btn-primary btn-rounded">
+              {edit ? "Submit" : "Edit bio"}
             </button>
              :
              (
               followed ?
-              <button onClick={handleUnfollow} type="button" className="btn btn-primary btn-rounded btn-lg btn-danger">
+              <button onClick={handleUnfollow} type="button" className="btn btn-primary btn-rounded btn-danger">
               Unfollow
             </button>
               :
-              <button onClick={handleFollow} type="button" className="btn btn-primary btn-rounded btn-lg ">
+              <button onClick={handleFollow} type="button" className="btn btn-primary btn-rounded ">
               Follow
             </button>)
             }
-            {error && <div className="alert alert-danger mt-2" role="alert">
-            {error}
+            {(error || bioError) && <div className="alert alert-danger mt-2" role="alert">
+            {error || bioError}
               </div>}
-            <div className="d-flex justify-content-center text-center mt-5 mb-2">
+            <div className="d-flex justify-content-center text-center mt-4 mb-2">
               <div className="px-3">
                 <p className="mb-2 h5">{userInfo?.posts.length}</p>
                 <p className="text-muted mb-0">Posts created</p>

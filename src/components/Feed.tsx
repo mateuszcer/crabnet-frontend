@@ -58,6 +58,9 @@ export default function Feed() {
                 if(res.status == 200) {
                     fetchedPosts.push(res.data)
                 }
+                else if(res.status == 401) {
+                    logout()
+                }
             }
             const postsToRender = fetchedPosts.flat().sort(comparePosts)
             setPosts(postsToRender)
