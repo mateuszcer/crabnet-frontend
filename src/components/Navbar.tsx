@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <nav className="navbar navbar-light bg-white">
-        <a href="/dashboard" className="navbar-brand">NotTwitter</a>
+        <a href="/dashboard" className="navbar-brand">Crabnet</a>
         <form className="form-inline" onSubmit={handleSubmit}>
             <div className="input-group">
                 <input placeholder="Search for users"  onInput={handleInput}type="text" className="form-control" aria-label="Recipient's username" aria-describedby="button-addon2"/>

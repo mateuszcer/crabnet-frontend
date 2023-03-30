@@ -1,10 +1,10 @@
 
 # Frontend of social media app
 
-This is frontend of social media app project
+This is frontend of social media app project Crabnet
 
 
-[Checkout backend written is Spring](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+[Checkout backend written is Spring](https://github.com/mateuszcer/crabnet-backend)
 
 
 ## Run Locally
@@ -12,13 +12,13 @@ This is frontend of social media app project
 Clone the project
 
 ```bash
-  git clone https://github.com/mateuszcer/social-media-app-frontend.git
+  git clone https://github.com/mateuszcer/crabnet-frontend.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd social-media-app-frontend
+  cd crabnet-frontend
 
 ```
 
