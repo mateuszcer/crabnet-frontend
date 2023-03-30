@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import "./Login.css"
+import "../styles/Login.css"
 import userServices from '../services/user.services'
 import authServices from '../services/auth.services'
 import { useNavigate } from 'react-router-dom'
+import { useSignup } from '../hooks/useSignup'
 
 function RegisterPage() {
     const navigate = useNavigate();
     const [gender, setGender] = useState<string>("")
+    const {signup, error, isLoading} = useSignup()
     const onRadioChange = (event: any) => {
         setGender(event.target.value)
     }
@@ -18,8 +20,13 @@ function RegisterPage() {
     const firstname = event.target[2].value
     const lastname = event.target[3].value
     const password = event.target[4].value
-    console.log(lastname)
-    authServices.registerUser(email, username, firstname, lastname, password, gender);    
+
+    const res = await signup(email, username, firstname, lastname, password, gender)
+    
+    if(res) {
+      navigate("/signup/confirm")
+    }
+    
 }
 
   return (
@@ -78,12 +85,22 @@ function RegisterPage() {
             </div>
             <div className="form-check form-check-inline">
               <input type="radio" className="form-check-input" onChange={onRadioChange} name="optradio" value="Other"/>Other
-            </div> 
+            </div>
+
+            {error && <div className="alert alert-danger mt-2" role="alert">
+            {error}
+          </div>}  
+               
           <div className="d-grid gap-2 mt-3">
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
+
+            
           </div>
+          
+          
+
           <p className="forgot-password text-right mt-2">
             Already <a href="/login">registered</a>
           </p>

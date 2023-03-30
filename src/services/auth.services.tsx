@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import TokenService from "./token.services";
+import userServices from "./user.services";
 const API_URL = "http://localhost:8080/auth";
 const LOGIN_ENDPOINT = API_URL + "/signin";
 const REGISTER_ENDPOINT = API_URL + "/signup";
@@ -17,7 +19,7 @@ class AuthService {
                 }
                 return response;
               })
-              .catch(error => error);
+              .catch(error => error.response);
     }
 
     async registerUser(email: string, username: string, firstname: string, lastname: string, password: string, gender: string) {
@@ -31,14 +33,19 @@ class AuthService {
                 "password": password
             })
             .then(response => {
-                return response.data;
+                return response;
               })
-              .catch(error => error);
+              .catch(error => error.response);
 
     }
 
+    getUsername = () => {
+        return JSON.parse(localStorage.getItem("auth") || '""')["username"]
+    }
+
+
     isLogged = () => {
-        // const { updateLoginStatus } = useContext(AuthContext)
+        //const { updateLoginStatus } = useContext(AuthContext)
     
         return TokenService.hasToken();
         // return {

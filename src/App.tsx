@@ -10,6 +10,9 @@ import RequireAuth from './components/RequireAuth'
 import Dashboard from './components/Dashboard'
 import UserProfile from './components/UserProfile'
 import RegisterPage from './components/RegisterPage'
+import ConfirmSignup from './components/ConfirmSignup'
+import UserSearchCard from './components/UserSearchCard'
+import Search from './components/Search'
 
 function App() {
   const handleLogin = () => {
@@ -22,8 +25,20 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />}/>
         <Route path="/" element={<LoginPage />}/>
-        <Route path="/register" element={<RegisterPage/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/signup/confirm" element={<ConfirmSignup/>}/>
+        <Route path="/signup" element={<RegisterPage/>}/>
+        <Route path="/dashboard" element={
+        <RequireAuth>
+        <Dashboard/>
+        </RequireAuth>
+        
+        }/>
+         <Route path="/search/:pattern" element={
+        <RequireAuth>
+          <Search/>
+        </RequireAuth>
+        
+        }/>
         <Route path="/profile/:username" element={
         <RequireAuth>
           <UserProfile />

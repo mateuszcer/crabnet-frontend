@@ -1,6 +1,9 @@
 import React from 'react'
-import "./Dashboard.css"
-export default function UserPost() {
+import "../styles/Dashboard.css"
+import PostInfo from '../types/PostInfo'
+
+
+export default function UserPost({id, authorUsername, content, creationTime, likedBy}: PostInfo) {
 
 
   return (
@@ -12,8 +15,8 @@ export default function UserPost() {
                                     <img className="rounded-circle" width="45" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""/>
                                 </div>
                                 <div className="ml-2">
-                                    <div className="h5 m-0">@bootdey</div>
-                                    <div className="h7 text-muted">Mark Lee Smith</div>
+                                <a href={"/profile/" + authorUsername}><div className="h5 m-0">@{authorUsername}</div></a>
+
                                 </div>
                             </div>
                             <div>
@@ -33,11 +36,10 @@ export default function UserPost() {
 
                     </div>
                     <div className="card-body">
-                        <div className="text-muted h7 mb-2"> <i className="fa fa-clock-o"></i>10 min ago</div>
+                        <div className="text-muted h7 mb-2"> <i className="fa fa-clock-o"></i>{creationTime} </div>
                 
                         <p className="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                            sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                            {content}
                         </p>
                     </div>
                     <div className="card-footer">

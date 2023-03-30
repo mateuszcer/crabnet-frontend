@@ -1,36 +1,27 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import "./Login.css"
+import "../styles/Login.css"
 import AuthService from "../services/auth.services"
 import { useNavigate } from 'react-router-dom'
 import Popup from 'reactjs-popup';
 import { render } from 'react-dom'
+import { useLogin } from '../hooks/useLogin'
 
 function LoginPage() {
   const navigate = useNavigate()
-  const [showMessage, setShowMessage] = useState<boolean>(false);
-
+  const {login, error, isLoading} = useLogin();
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const email = event.target[0].value
     const password = event.target[1].value
-    const response = await AuthService.login(email, password);
-    if(response.status == "200") {
-      setShowMessage(false)
-      navigate("/profile/" + response.data.username)
+    const res = await login(email, password)
+    console.log(res)
+    if(res) {
+      
+      navigate("/dashboard")
     }
-    else {
-      setShowMessage(true)
-    } 
+     
   }
-
-  const renderErrorMessage = () =>
-  
-  showMessage && (
-    <div className="alert alert-danger" role="alert">
-  Enter valid credentials
-  </div>
-  );
 
   return (
     <div className="Auth-form-container">
@@ -53,14 +44,16 @@ function LoginPage() {
               placeholder="Enter password"
             />
           </div>
-          {renderErrorMessage()}
+          {error && <div className="alert alert-danger mt-2" role="alert">
+            {error}
+          </div>}  
           <div className="d-grid gap-2 mt-3">
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </div>
           <p className="forgot-password text-right mt-2">
-            Create <a href="/register">account</a>
+            Create <a href="/signup">account</a>
           </p>
         </div>
       </form>

@@ -1,6 +1,6 @@
 interface UserAuthInfo {
-    token: string
-    username: string
+    token: string | null
+    username: string | null
 }
 
 export default UserAuthInfo
