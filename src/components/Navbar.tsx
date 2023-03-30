@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
+import profilePicture from '../assets/user.png'
+import authServices from '../services/auth.services'
 import userServices from '../services/user.services'
+import pictureServices from '../services/picture.services'
 
 export default function Navbar() {
-
+    const profileUrl = "/profile/" + authServices.getUsername()
     const [pattern, setPattern] = useState("")
     const {logout} = useLogout()
     const navigate = useNavigate()
@@ -23,14 +26,27 @@ export default function Navbar() {
     
 
   return (
-    <nav className="navbar navbar-light bg-white">
-        <a href="/dashboard" className="navbar-brand">Crabnet</a>
-        <form className="form-inline" onSubmit={handleSubmit}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+        <div className="container-fluid">
+
+        <a href="/dashboard" className="navbar-brand font-weight-normal"><p className="h3"><b className="text-danger">Crab</b><b>Net</b></p></a>
+        </div>
+        <div className="card-footer">
+
+        <form className="form-inline mr-5" onSubmit={handleSubmit}>
             <div className="input-group">
-                <input placeholder="Search for users"  onInput={handleInput}type="text" className="form-control" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                <input placeholder="Search for users"  onInput={handleInput} type="search" className="form-control me-2" aria-label="Search" />
                 
             </div>
         </form>
+        
+        <div className="">
+              <a href={profileUrl} ><img src={pictureServices.getSelfPicture()}
+                className="rounded-circle img-fluid " style={{width: "60px"}} /></a>
+            </div>
+                
+        
+        </div>
     </nav>
   )
 }

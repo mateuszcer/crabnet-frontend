@@ -9,6 +9,7 @@ interface User {
     followers: Array<string>
     following: Array<string>
     bio: string
+    pictureId: number
 }
 
 

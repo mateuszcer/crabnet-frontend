@@ -8,6 +8,7 @@ import UserPost from "./UserPost";
 import PostInfo from "../types/PostInfo";
 import { useLogout } from "../hooks/useLogout";
 import userPostServices from "../services/userPost.services";
+import pictureServices from "../services/picture.services";
 
 export default function Feed() {
 
@@ -79,7 +80,8 @@ export default function Feed() {
 
             
                 <PostCreator posts={posts || []} setPosts={setPosts}/>
-                {posts?.map(post => <UserPost id={post.id} key={post.id} authorUsername={post.authorUsername} content={post.content} creationTime={formatPublishedTime(post.creationTime)} likedBy={post.likedBy} />)}
+                {posts?.map(post => <UserPost id={post.id} key={post.id} authorUsername={post.authorUsername} content={post.content} creationTime={formatPublishedTime(post.creationTime)} 
+                likedBy={post.likedBy} authorPictureId={userInfo?.pictureId || 1}/>)}
             </div>
             <div className="col-md-3">
                 <div className="card gedf-card">

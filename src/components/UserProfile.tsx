@@ -4,14 +4,19 @@ import UserInfo from "../types/UserInfo"
 import { useState } from 'react';
 import UserServices from '../services/user.services';
 import { useEffect } from 'react';
-
-import profilePicture from '../assets/user.png'
 import { useParams } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import Navbar from './Navbar';
 import userServices from '../services/user.services';
 import AuthService from '../services/auth.services'
 import { useFollow } from '../hooks/useFollow';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import pictureServices from '../services/picture.services';
+import PicturePicker from './PicturePicker';
+
 export default function UserProfile() {
     const [userInfo, setUserInfo] = useState<UserInfo>();
     const [isMe, setIsMe] = useState<boolean>(false);
@@ -67,18 +72,33 @@ export default function UserProfile() {
 
   return (
     <React.StrictMode>
-      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" ></link>
     <section className="vh-100" style={{backgroundColor: "#eee"}}>
+
     <Navbar/>
+    
   <div className="container py-5 h-100">
     <div className="row d-flex justify-content-center align-items-center">
       <div className="col-md-12 col-xl-4">
 
         <div className="card" style={{borderRadius: "15px"}}>
           <div className="card-body text-center">
-            <div className="mt-3 mb-4">
-              <img src={profilePicture}
-                className="rounded-circle img-fluid" style={{width: "100px"}} />
+            <div className="mt-3 mb-4 displ">
+              <div className="">
+
+                <img src={pictureServices.getPicture(userInfo?.pictureId || 1)}
+                  className="rounded-circle img-fluid" style={{width: "100px"}} />
+                  <div className="edit-wrapper">
+                  <Popup trigger={
+                    <button type="button" className="btn btn-success btn-floating edit" >
+                    <FontAwesomeIcon  size="xs" icon={faPencil} />
+                </button>
+                  } position="right center">
+                  <PicturePicker/>
+                  </Popup>
+                    
+                  </div>
+              </div>
             </div>
             <h4 className="mb-2">{userInfo?.firstname} {userInfo?.lastname}</h4>
             <p className="text-muted mb-3">@{userInfo?.username}</p>

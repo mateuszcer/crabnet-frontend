@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { ImgHTMLAttributes, ReactElement } from 'react'
+import pictureServices from '../services/picture.services'
 import "../styles/Dashboard.css"
 import PostInfo from '../types/PostInfo'
 
 
-export default function UserPost({id, authorUsername, content, creationTime, likedBy}: PostInfo) {
-
+export default function UserPost({id, authorUsername, content, creationTime, likedBy, authorPictureId}: PostInfo ) {
+    
 
   return (
     <div className="card gedf-card">
@@ -12,7 +13,7 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="mr-2">
-                                    <img className="rounded-circle" width="45" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""/>
+                                    <img className="rounded-circle" width="45" src={pictureServices.getPicture(authorPictureId)} alt=""/>
                                 </div>
                                 <div className="ml-2">
                                 <a href={"/profile/" + authorUsername}><div className="h5 m-0">@{authorUsername}</div></a>

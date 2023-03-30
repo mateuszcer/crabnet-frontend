@@ -4,4 +4,5 @@ export default interface PostInfo {
     creationTime: string
     likedBy: Array<string>
     id: number
+    authorPictureId: number
 }

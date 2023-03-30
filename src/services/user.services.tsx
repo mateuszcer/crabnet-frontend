@@ -6,6 +6,7 @@ const FOLLOW_ENDPOINT = API_URL + "/follow";
 const UNFOLLOW_ENDPOINT = API_URL + "/unfollow";
 const ALL_USER_PATTERN_ENDPOINT = API_URL + "/all/";
 const BIO_ENDPOINT = API_URL + "/bio"
+const PICTURE_ENDPOINT = API_URL + "/picture"
 
 class UserServices {
     async getSelfInfo() {
@@ -27,6 +28,10 @@ class UserServices {
 
     getFollowing() {
         return JSON.parse(localStorage.getItem("user_info") || '""')["following"]
+    }
+
+    getPictureId() {
+        return JSON.parse(localStorage.getItem("user_info") || '""')["pictureId"]
     }
     
 
@@ -62,6 +67,20 @@ class UserServices {
         return axios
         .post(BIO_ENDPOINT, {bio: newBio}, {headers: {'Authorization': `Bearer ${TokenService.getToken()}`}})
         .then(response => response)
+        .catch(error => error.response)
+    }
+
+    async updatePicture(newId: number) {
+        return axios
+        .post(PICTURE_ENDPOINT + "/" + newId, {}, {headers: {'Authorization': `Bearer ${TokenService.getToken()}`}})
+        .then(response => {
+            if(response.status == 200){
+                const userInfo = JSON.parse(localStorage.getItem("user_info") || '""')
+                userInfo["pictureId"] = newId
+                localStorage.setItem("user_info", JSON.stringify(userInfo))
+                return response
+            }
+        })
         .catch(error => error.response)
     }
 
