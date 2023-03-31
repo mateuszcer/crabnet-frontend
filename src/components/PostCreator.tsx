@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import userPostServices from '../services/userPost.services'
 import PostInfo from '../types/PostInfo'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, setPosts: React.Dispatch<Array<PostInfo>> }) {
     const [postContent, setPostContent] = useState("")
@@ -42,7 +44,12 @@ export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, 
                         </div>
                         <div className="btn-toolbar justify-content-between">
                             <div className="btn-group">
-                                <button type="submit" className="btn btn-primary" >share</button>
+                                <button type="submit" className="btn btn-primary " >
+                                    
+                                    Share
+                                    <FontAwesomeIcon className="ml-2" size="xs" icon={faPaperPlane}/>
+                                    
+                                    </button>
                             </div>  
                         </div>
                         </form>

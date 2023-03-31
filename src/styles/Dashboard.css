@@ -25,3 +25,8 @@ body {
     content: none;
     display: none;
 }
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }

@@ -2,10 +2,37 @@ import React, { ImgHTMLAttributes, ReactElement } from 'react'
 import pictureServices from '../services/picture.services'
 import "../styles/Dashboard.css"
 import PostInfo from '../types/PostInfo'
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp, faComment,  } from '@fortawesome/free-solid-svg-icons'
+import userPostServices from '../services/userPost.services'
+import { useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 export default function UserPost({id, authorUsername, content, creationTime, likedBy, authorPictureId}: PostInfo ) {
-    
+    const [likes, setLikes] = useState<number>(likedBy.length)
+    const {state} = useAuthContext()
+    const [isLiked, setIsLiked] = useState<boolean>(likedBy.includes(state.username || ""))
+    const handleLike = async (e: any) => {
+        const res = await userPostServices.likePost(id)
+        if(res.status == 200) {
+            setLikes(likes+1)
+            setIsLiked(true)
+            return    
+        }
+        
+        
+    }
+
+    const handleDislike = async (e: any) => {
+        const res = await userPostServices.dislikePost(id)
+        if(res.status == 200) {
+            setLikes(likes-1)
+            setIsLiked(false)
+            return    
+        }
+        
+        
+    }
+
 
   return (
     <div className="card gedf-card">
@@ -44,9 +71,22 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
                         </p>
                     </div>
                     <div className="card-footer">
-                        <a href="#" className="card-link"><i className="fa fa-gittip"></i> Like</a>
-                        <a href="#" className="card-link"><i className="fa fa-comment"></i> Comment</a>
-                        <a href="#" className="card-link"><i className="fa fa-mail-forward"></i> Share</a>
+                        <div>{likes}</div>
+                        {isLiked ?
+                            <button className="btn liked" onClick={handleDislike}>
+                            <FontAwesomeIcon color="#0275d8 "  icon={faThumbsUp} />
+                                </button>
+                                :
+                                <button className="btn" onClick={handleLike}>
+                            <FontAwesomeIcon   icon={faThumbsUp} />
+                                </button>
+                        }
+                        
+                        <button className="btn">
+                    <FontAwesomeIcon  icon={faComment} />
+                        </button>
+              
+                       
                     </div>
                 </div>
   )
