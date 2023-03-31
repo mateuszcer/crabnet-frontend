@@ -16,6 +16,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import pictureServices from '../services/picture.services';
 import PicturePicker from './PicturePicker';
+import UserPost from './UserPost';
+import userPostServices from '../services/userPost.services';
 
 export default function UserProfile() {
     const [userInfo, setUserInfo] = useState<UserInfo>();
@@ -62,6 +64,7 @@ export default function UserProfile() {
           if(res.data.username === AuthService.getUsername()){
             setIsMe(true)
           }
+          res.data["posts"] = res.data["posts"].sort(userPostServices.comparePosts)
           setUserInfo(res.data)
           setBio(res.data["bio"])
           setContent(res.data["bio"])
@@ -144,6 +147,10 @@ export default function UserProfile() {
         </div>
 
       </div>
+    </div>
+    <div className="posts">
+
+            {userInfo?.posts.map(post => <UserPost key={post.id} {...post} />)}
     </div>
   </div>
 </section>

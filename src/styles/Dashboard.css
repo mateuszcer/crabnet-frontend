@@ -26,7 +26,38 @@ body {
     display: none;
 }
 
-.btn:focus,.btn:active {
-    outline: none !important;
-    box-shadow: none;
- }
+.like-control {
+    transform: scale .5s, color .5s;
+}
+
+.like-control:hover {
+    color:#0275d8;
+}
+
+.post-info-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: red;
+    justify-content: space-between;
+    width: 100% !important;
+}
+
+
+
+.card-header-container {
+    
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.post-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post {
+    margin-top: 10px;
+}

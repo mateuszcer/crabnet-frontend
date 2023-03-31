@@ -9,7 +9,7 @@ import userServices from "./user.services"
 class PictureServices {
     private pictures =[men1, men2, men3, women1, women2, women3]
     getPicture = (id: number) => {
-        if(id >= this.pictures.length)
+        if(id >= this.pictures.length || id <= 0 || !id)
             return this.pictures[0]
         return this.pictures[id-1]
     }

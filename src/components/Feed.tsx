@@ -15,39 +15,9 @@ export default function Feed() {
     const [userInfo, setUserInfo] = useState<User>();
     const {logout} = useLogout()
     const [posts, setPosts] = useState<Array<PostInfo>>([]);
-    
+    const {comparePosts, formatPublishedTime} = userPostServices 
 
-    const calculatePublishedTime = (creationTime: string) => {
-        return Math.floor((Date.now() - Date.parse(creationTime)) / (1000*60))
-    }
-
-    const formatPublishedTime = (creationTime: string) => {
-        const timeInMin = calculatePublishedTime(creationTime)
-        if(timeInMin >= 2880) {
-            return Math.floor(timeInMin/1440) + " days ago"
-        }
-        else if(timeInMin >= 1440) {
-            return " day ago"
-        }
-        else if(timeInMin >= 120) {
-            return Math.floor(timeInMin / 60) + " hours ago";
-        }
-        else if(timeInMin >= 60) {
-            return " hour ago"
-        }
-        else if(timeInMin == 1) {
-            return "minute ago"
-        }
-        else if(timeInMin == 0) {
-            return "just now"
-        }
-        return timeInMin + " minutes ago"
-    }
-
-    const comparePosts = (postA: PostInfo, postB: PostInfo) => {
-        return (calculatePublishedTime(postA.creationTime) - calculatePublishedTime(postB.creationTime))
-        
-    }
+   
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -57,6 +27,7 @@ export default function Feed() {
                 const res = await userPostServices.getNewestPosts(username)
 
                 if(res.status == 200) {
+                    console.log(res.data)
                     fetchedPosts.push(res.data)
                 }
                 else if(res.status == 401) {
@@ -80,8 +51,9 @@ export default function Feed() {
 
             
                 <PostCreator posts={posts || []} setPosts={setPosts}/>
-                {posts?.map(post => <UserPost id={post.id} key={post.id} authorUsername={post.authorUsername} content={post.content} creationTime={formatPublishedTime(post.creationTime)} 
-                likedBy={post.likedBy} authorPictureId={userInfo?.pictureId || 1}/>)}
+                {posts?.map(post => <UserPost id={post.id} key={post.id} authorUsername={post.authorUsername} content={post.content} 
+                creationTime={post.creationTime} 
+                likedBy={post.likedBy} authorPictureId={post.authorPictureId || 1}/>)}
             </div>
             <div className="col-md-3">
                 <div className="card gedf-card">

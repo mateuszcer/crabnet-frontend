@@ -1,0 +1,45 @@
+/* .settings:hover {
+    scale: 20;
+} */
+
+.settings {
+    transform: rotate(0);
+    transition: scale .1s, transform .2s;
+    
+}
+
+.settings:hover {
+    transform: rotate(90deg);
+    scale: 1.05;
+}
+
+.profile-picture {
+    
+    transition: scale 0.2s;
+}
+
+.profile-picture:hover {
+    scale: 1.05;
+    
+}
+
+.navbar-container {
+    display: flex;
+    
+    width: 100%;
+    justify-content: space-between;
+}
+
+.navbar-controls {
+    
+    display: flex;
+    align-items: center;
+    
+}
+
+.brand-container {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

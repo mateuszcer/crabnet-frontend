@@ -13,7 +13,8 @@ import RegisterPage from './components/RegisterPage'
 import ConfirmSignup from './components/ConfirmSignup'
 import UserSearchCard from './components/UserSearchCard'
 import Search from './components/Search'
-
+import "./styles/Global.css"
+import PostPage from './components/PostPage'
 function App() {
   const handleLogin = () => {
     console.log(AuthService.login("admin", "admin"))
@@ -32,6 +33,11 @@ function App() {
         <Dashboard/>
         </RequireAuth>
         
+        }/>
+        <Route path="/post/:id" element= {
+          <RequireAuth>
+            <PostPage />
+          </RequireAuth>
         }/>
          <Route path="/search/:pattern" element={
         <RequireAuth>
