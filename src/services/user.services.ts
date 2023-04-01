@@ -21,6 +21,14 @@ class UserServices {
             
     }
 
+    isFollowed(username: string) {
+        return this.getFollowing().includes(username)
+    }
+
+    isFollowing(username: string) {
+        return this.getFollowers().includes(username)
+    }
+
     getFollowers() {
         return JSON.parse(localStorage.getItem("user_info") || '""')["followers"]
     }

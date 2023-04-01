@@ -22,10 +22,10 @@ export default function PicturePicker() {
   }
 
   return (
-    <div className="fluid-container picture-container">
+    <div className="picture-container">
        
         
-        {pictures.map((elem, index) => <img key={index} onClick={(e) => handlePicturePick(index+1)} src={elem}></img>)}
+        {pictures.map((elem, index) => <img key={index} className={pickedId == index+1 ? "picked" : ""} onClick={(e) => handlePicturePick(index+1)} src={elem}></img>)}
         {picked ?
         <button onClick={handlePictureSubmit} className="btn btn-primary">Change profile picture</button>  :
         <></>

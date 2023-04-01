@@ -47,7 +47,7 @@ export default function Navbar() {
 
             <div className="mr-3">
                 <a href={profileUrl} ><img src={pictureServices.getSelfPicture()}
-                  className="rounded-circle img-fluid profile-picture" style={{width: "50px"}} /></a>
+                  className="rounded-circle img-fluid profile-picture" style={{width: "45px"}} /></a>
             </div>
 
             <div>

@@ -1,0 +1,99 @@
+.post-footer {
+    
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    
+}
+
+.post-footer-action {
+    
+    display: flex;
+    align-items: center;
+    
+    
+    margin: 9px 0px 9px 9px;
+    
+}
+
+.action {    
+    
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    
+    padding: 0px 3.5px 0px 3.5px;
+    margin-left: 5px;
+
+    transition: color .14;
+}
+
+.action:hover {    
+    
+    cursor: pointer;
+    background-color: rgb(235, 232, 232);
+    border-radius: 6px;
+}
+
+.action button{    
+    
+    padding: 0px 6px 0px 3px;
+    /* padding: 0px 7px 0px 10px !important; */
+    /* margin-bottom: 1px; */
+}
+
+
+.post-footer-action p{
+    margin: 0px 2px 0px 0px !important;
+    font-weight: 600;
+    font-size: .89rem;
+}
+
+.author-profile {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    cursor: pointer;
+    color: rgb(2, 117, 217);
+    
+}
+
+.author-profile {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    cursor: pointer;
+    color: rgb(2, 117, 217);
+    
+}
+
+
+.post-info p{
+    margin: 0px 0px 0px 12px;
+    color: rgba(108, 117, 125, 0.833) ;
+    font-size: .9rem;
+}
+
+.time {
+    
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.time p {
+    margin: 0px 0px 0px 4px;
+}
+
+.like-action {
+    transition: color .1s;
+}
+
+.like-action:hover .like-control{
+    color:#df4759 ;
+    
+}
+
+.like-action:hover {
+    color:#df4759 ;
+}

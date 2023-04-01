@@ -13,7 +13,7 @@ import { useFollow } from '../hooks/useFollow';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import pictureServices from '../services/picture.services';
 import PicturePicker from './PicturePicker';
 import UserPost from './UserPost';
@@ -76,22 +76,23 @@ export default function UserProfile() {
   return (
     <React.StrictMode>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" ></link>
-    <section className="vh-100" style={{backgroundColor: "#eee"}}>
+    <section className="vh-100 test" style={{backgroundColor: "#eee"}}>
 
     <Navbar/>
     
-  <div className="container py-5 h-100">
-    <div className="row d-flex justify-content-center align-items-center">
+  <div className="container py-5 h-100 test">
+    <div className="row d-flex justify-content-center align-items-center test">
       <div className="col-md-12 col-xl-4">
 
         <div className="card" style={{borderRadius: "15px"}}>
           <div className="card-body text-center">
-            <div className="mt-3 mb-4 displ">
+            <div className="mt-3 mb-2 displ">
               <div className="">
 
                 <img src={pictureServices.getPicture(userInfo?.pictureId || 1)}
                   className="rounded-circle img-fluid" style={{width: "100px"}} />
                   <div className="edit-wrapper">
+                    {isMe ?
                   <Popup trigger={
                     <button type="button" className="btn btn-success btn-floating edit" >
                     <FontAwesomeIcon  size="xs" icon={faPencil} />
@@ -99,11 +100,14 @@ export default function UserProfile() {
                   } position="right center">
                   <PicturePicker/>
                   </Popup>
-                    
+                  :
+                  <></>  
+                  }
                   </div>
               </div>
             </div>
-            <h4 className="mb-2">{userInfo?.firstname} {userInfo?.lastname}</h4>
+            <h4 className="mb-2">{userInfo?.firstname} {userInfo?.lastname} </h4>
+            
             <p className="text-muted mb-3">@{userInfo?.username}</p>
             {edit ? 
             <textarea  onChange={e => setContent(e.target.value)} className="form-control mb-4" defaultValue={bio}></textarea>

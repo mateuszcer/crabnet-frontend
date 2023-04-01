@@ -26,18 +26,11 @@ body {
     display: none;
 }
 
-.like-control {
-    transform: scale .5s, color .5s;
-}
 
-.like-control:hover {
-    color:#0275d8;
-}
 
 .post-info-wrapper {
     display: flex;
     align-items: center;
-    background-color: red;
     justify-content: space-between;
     width: 100% !important;
 }
@@ -60,4 +53,35 @@ body {
 
 .post {
     margin-top: 10px;
+}
+
+.repo-links {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+
+.links {
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: baseline;
+    
+
+}
+
+.links a {
+    margin: 5px 0px 0px 0px !important;
+   
+}
+
+.git-icon {
+    margin: 10px 10px 0px 5px !important;
+}
+
+.link-icon {
+    margin-left: 5px;
 }

@@ -1,4 +1,31 @@
+.picture-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    flex-wrap: wrap
+}
+
 
 .picture-container img {
     width: 80px;
+    transition: scale .2s;
+}
+
+.picture-container img:hover {
+    scale: 1.03;
+    cursor: pointer;
+}
+
+.picked {
+    scale: 1.03;
+    border-radius: 100px;
+    box-shadow: rgba(7, 47, 81, 0.35) 0px 5px 15px;
+}
+
+
+
+
+.picture-container button {
+    margin: 15px;
 }

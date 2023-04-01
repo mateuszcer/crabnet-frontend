@@ -22,7 +22,7 @@ export default function UserCard() {
       }, [])
 
   return (
-    <div className="col-md-3">
+    <div className="col-md-3 mt-3">
                 <div className="card">
                     <div className="card-body">
                         <div className="h5">@{userInfo?.username}</div>

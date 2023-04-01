@@ -102,7 +102,7 @@ function RegisterPage() {
           
 
           <p className="forgot-password text-right mt-2">
-            Already <a href="/login">registered</a>
+            Already <a href="#" onClick={e => navigate("/login")}>registered</a>
           </p>
         </div>
       </form>
