@@ -1,4 +1,4 @@
-import React, { ImgHTMLAttributes, ReactElement } from 'react'
+import React, { ImgHTMLAttributes, ReactElement, useEffect } from 'react'
 import pictureServices from '../services/picture.services'
 import "../styles/Dashboard.css"
 import PostInfo from '../types/PostInfo'
@@ -15,15 +15,17 @@ import userServices from '../services/user.services'
 import timeUtils from '../utils/time.utils'
 import Comment from './Comment'
 import CommentsContainer from './CommentsContainer'
+import CommentInfo from '../types/CommentInfo'
 
 
 export default function UserPost({id, authorUsername, content, creationTime, likedBy, comments, authorPictureId}: PostInfo ) {
     const {state} = useAuthContext()
-    const [isLiked, setIsLiked] = useState<boolean>(likedBy.includes(state.username || ""))
-    const [isMine, setIsMine] = useState<boolean>(authorUsername === state.username)
+    const [isLiked, setIsLiked] = useState<boolean>(false)
+    const [isMine, setIsMine] = useState<boolean>(false)
     const [isVisible, setIsVisible] = useState<boolean>(true)
     const [showComments, setShowComments] = useState<boolean>(false)
-    const [likes, setLikes] = useState<number>(likedBy.length)
+    const [likes, setLikes] = useState<number>(0)
+    const [commentsArr, setCommentsArr] = useState<Array<CommentInfo>>([])
 
     const postUrl = "http://127.0.0.1:5173/post/" + id
     const navigate = useNavigate()
@@ -61,6 +63,13 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
             //window.location.reload()
         }
     }
+
+    useEffect(() => {
+        setIsLiked(likedBy.includes(state.username || ""))
+        setIsMine(authorUsername === state.username)
+        setLikes(likedBy.length)
+        setCommentsArr(comments)
+    })
 
 
   return (
@@ -174,7 +183,7 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
                     </div>
                     {
                         showComments ?
-                        <CommentsContainer comments={comments} sourceId={id}/>
+                        <CommentsContainer comments={commentsArr} sourceId={id}/>
                     :
                     <></>
                     }

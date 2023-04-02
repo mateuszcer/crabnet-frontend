@@ -42,6 +42,7 @@ export default function Feed() {
         } 
         getUserInfo();
       }, [])
+      console.log(posts)
     return (
     <div>
 
@@ -53,6 +54,7 @@ export default function Feed() {
 
             
                 <PostCreator posts={posts || []} setPosts={setPosts}/>
+                
                 {posts?.map(post => <UserPost {...post}/>)}
             </div>
             
