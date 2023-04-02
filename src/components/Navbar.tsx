@@ -38,16 +38,16 @@ export default function Navbar() {
         
           <div className="navbar-controls">
 
-            <form className="form-inline mr-4" onSubmit={handleSubmit}>
+            <form className="form-inline nav-form mr-3" onSubmit={handleSubmit}>
                 <div className="input-group">
-                    <input placeholder="Search for users"  onInput={handleInput} type="search" className="form-control mr-3" aria-label="Search" />
+                    <input placeholder="Search for users"  onInput={handleInput} type="search" className="form-control" aria-label="Search" />
 
                 </div>
             </form>
 
-            <div className="mr-3">
+            <div className="mr-3 nav-profile-picture">
                 <a href={profileUrl} ><img src={pictureServices.getSelfPicture()}
-                  className="rounded-circle img-fluid profile-picture" style={{width: "45px"}} /></a>
+                  className="rounded-circle profile-picture" style={{width: "45px"}} /></a>
             </div>
 
             <div>
@@ -59,7 +59,7 @@ export default function Navbar() {
 
               <Dropdown.Menu>
                 <Dropdown.Item onClick={e => logout()}>Logout</Dropdown.Item>
-
+                <Dropdown.Item onClick={e => navigate(profileUrl)}>Profile</Dropdown.Item>
               </Dropdown.Menu>
                 </Dropdown>
               </div>

@@ -69,7 +69,7 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
         setIsMine(authorUsername === state.username)
         setLikes(likedBy.length)
         setCommentsArr(comments)
-    })
+    }, [])
 
 
   return (

@@ -3,6 +3,8 @@ export default interface CommentInfo {
     authorUsername: string
     authorPictureId: number
     sourceId: number
+    id: number
+    likedBy: Array<string>
     creationTime: string
     
 }

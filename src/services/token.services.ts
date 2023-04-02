@@ -10,8 +10,6 @@ class TokenService {
 
     hasToken = () => {
         const {state} = useContext(AuthContext)
-        console.log(state)
-        console.log(state.token, state.token != undefined)
         return (state.token != "" && state.token != undefined)
     }
 

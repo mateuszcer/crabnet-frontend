@@ -18,6 +18,7 @@ class UserServices {
                 }
                 return response
             })
+            .catch(error => error.response)
             
     }
 

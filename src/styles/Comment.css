@@ -1,15 +1,17 @@
 .comment {
-    margin: 0px 0px 12px 0px;
+    margin: 0px 0px 0px 0px;
     border-top: 1px solid rgba(124, 123, 123, 0.352);
+    
     
 }
 
 .comment-body {
+    
     border-radius: 5px;
     border: 1px solid #8080801a;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     padding: 8px 8px 5px 8px;
-    background-color: #e7e4e412;
+    background-color: white;
     
 }
 
@@ -21,6 +23,23 @@
     
     
     
+}
+
+.comment-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.delete-icon {
+    color: #6c757d ;
+    visibility: hidden;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.comment:hover .delete-icon {
+    visibility: visible;
 }
 
 .comment-creator-form {
@@ -62,8 +81,8 @@
 }
 
 .comments-container {
-    background-color: transparent;
-    padding: 2px 0px 2px 0px;
+    
+    padding: 2px 0px 0px 0px;
 }
 
 .comment-header {
@@ -71,6 +90,7 @@
     justify-content: start;
     align-items: center;
     margin-bottom: 10px;
+    
 }
 
 .comment-username {

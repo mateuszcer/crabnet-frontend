@@ -15,7 +15,6 @@ function LoginPage() {
     const email = event.target[0].value
     const password = event.target[1].value
     const res = await login(email, password)
-    console.log(res)
     if(res) {
       
       navigate("/dashboard")

@@ -7,7 +7,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, setPosts: React.Dispatch<Array<PostInfo>> }) {
     const [postContent, setPostContent] = useState("")
-
+    const [error, setError] = useState("")
 
     const handleInput = (e: any) => {
         setPostContent(e.target.value)
@@ -17,8 +17,11 @@ export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, 
         e.preventDefault()
         const response = await userPostServices.createPost(postContent)
         e.target[0].value = ""
-        setPosts([response.data, ...posts])
-        
+        if(response.status == 200)
+            setPosts([response.data, ...posts])
+        else {
+            setError("Post content should be a maximum of 255 characters in size!")
+        }
     }
 
   return (
@@ -53,6 +56,12 @@ export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, 
                             </div>  
                         </div>
                         </form>
+                        {
+                            error ?
+                            <div className="alert alert-danger mt-2" role="alert" >{error}</div>
+                            :
+                            <></>
+                        }
                     </div>
                 </div>
   )

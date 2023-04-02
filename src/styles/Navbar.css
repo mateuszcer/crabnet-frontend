@@ -18,6 +18,10 @@
     transition: scale 0.2s;
 }
 
+@media screen and (max-width: 424px) {    .nav-profile-picture { display: none; } }
+
+@media screen and (max-width: 424px) 
+{    .nav-form { margin-right: 0px !important; } }
 .profile-picture:hover {
     scale: 1.05;
     

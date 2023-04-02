@@ -23,6 +23,7 @@ export default function Feed() {
 
     useEffect(() => {
         const getUserInfo = async () => {
+          
           const following = userServices.getFollowing()
           const fetchedPosts: Array<Array<PostInfo>> = []
             for(const username of following) {
@@ -42,7 +43,7 @@ export default function Feed() {
         } 
         getUserInfo();
       }, [])
-      console.log(posts)
+      
     return (
     <div>
 
@@ -55,7 +56,7 @@ export default function Feed() {
             
                 <PostCreator posts={posts || []} setPosts={setPosts}/>
                 
-                {posts?.map(post => <UserPost {...post}/>)}
+                {posts?.map(post => <UserPost key={post.id} {...post}/>)}
             </div>
             
             <div className="col-md-3 mt-3">
@@ -68,7 +69,7 @@ export default function Feed() {
                         <a target="_blank" href="https://github.com/mateuszcer/crabnet-backend" className="card-link">Backend</a>
                     </div>
                 </div>
-                <div className="card gedf-card">
+                <div className="card gedf-card mt-3">
                         <div className="card-body">
                             <h5 className="card-title">Report bug</h5>
                             <h6 className="card-subtitle mb-2 text-muted">Help us improve</h6>

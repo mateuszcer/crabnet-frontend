@@ -1,5 +1,6 @@
 import { useState } from "react"
 import authServices from "../services/auth.services"
+import userServices from "../services/user.services"
 import { useAuthContext } from "./useAuthContext"
 
 export const useLogin = () => {
@@ -12,6 +13,7 @@ export const useLogin = () => {
 
         const response = await authServices.login(email, password)
         if(response.status == 200) {
+            await userServices.getSelfInfo()
             dispatch({type: 'LOGIN', payload: response.data})
             setIsLoading(false)
             return true
