@@ -64,7 +64,7 @@ export default function Feed() {
                     <div className="card-body">
                         <h5 className="card-title">CrabNet is open source</h5>
                         <h6 className="card-subtitle mb-2 text-muted">Become co-author</h6>
-                        <p className="card-text">You cant contribute to both the frontend and the backend codebases</p>
+                        <p className="card-text">You can contribute to both the frontend and the backend codebases</p>
                         <a target="_blank" href="https://github.com/mateuszcer/crabnet-frontend" className="card-link">Frontend</a>
                         <a target="_blank" href="https://github.com/mateuszcer/crabnet-backend" className="card-link">Backend</a>
                     </div>
