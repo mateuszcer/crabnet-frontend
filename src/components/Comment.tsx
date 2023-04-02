@@ -7,13 +7,14 @@ import { faThumbsUp , faTrash} from '@fortawesome/free-solid-svg-icons'
 import timeUtils from '../utils/time.utils'
 import userPostServices from '../services/userPost.services'
 import authServices from '../services/auth.services'
-import userServices from '../services/user.services'
+import { useNavigate } from 'react-router-dom'
 
 export default function Comment(commentInfo: CommentInfo) {
   const [likes, setLikes] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false)
   const [isMine, setIsMine] = useState<boolean>(false)
   const [isVisible, setIsVisible] = useState<boolean>(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLikes(commentInfo.likedBy.length)
@@ -57,7 +58,7 @@ export default function Comment(commentInfo: CommentInfo) {
                 <div className="comment-header">
                   <img src={pictureServices.getPicture(commentInfo.authorPictureId)} alt="avatar" width="30"
                     />
-                  <a href={`/profile/${commentInfo.authorUsername}`} className="comment-username">@{commentInfo.authorUsername}</a>
+                  <a href="#" onClick={(e) => navigate(`/profile/${commentInfo.authorUsername}`)} className="comment-username">@{commentInfo.authorUsername}</a>
                 </div>
 
                 {isMine ?

@@ -29,7 +29,7 @@ export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, 
                     <div className="card-header">
                         <ul className="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                             <li className="nav-item">
-                                <a className="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true"> Create post</a>
+                                <a className="nav-link active" id="posts-tab" data-toggle="tab" href="#" role="tab" aria-controls="posts" aria-selected="true"> Create post</a>
                             </li>
                         </ul>
                     </div>

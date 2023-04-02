@@ -32,8 +32,8 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white nav-wrapper" >
         <div className="navbar-container">
-          <div className="brand-container">  
-            <a href="/dashboard" className="navbar-brand font-weight-normal"><p className="h3"><b className="text-danger">Crab</b><b>Net</b></p></a>
+          <div className="brand-container" onClick={(e: any) => navigate("/dashboard")}>  
+            <a href="#" className="navbar-brand font-weight-normal"><p className="h3"><b className="text-danger">Crab</b><b>Net</b></p></a>
           </div>
         
           <div className="navbar-controls">
@@ -46,8 +46,8 @@ export default function Navbar() {
             </form>
 
             <div className="mr-3 nav-profile-picture">
-                <a href={profileUrl} ><img src={pictureServices.getSelfPicture()}
-                  className="rounded-circle profile-picture" style={{width: "45px"}} /></a>
+                <img onClick={(e: any) => navigate(profileUrl)} src={pictureServices.getSelfPicture()}
+                  className="rounded-circle profile-picture" style={{width: "45px"}} />
             </div>
 
             <div>

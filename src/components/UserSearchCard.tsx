@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useFollow } from '../hooks/useFollow'
 import authServices from '../services/auth.services'
 import pictureServices from '../services/picture.services'
@@ -9,7 +10,7 @@ import Navbar from './Navbar'
 export default function UserSearchCard({username, firstname, lastname, posts, followers, following, bio, pictureId}: User) {
 
     const {followed, error, handleFollow, handleUnfollow} = useFollow(username)
- 
+    const navigate = useNavigate()
   return (
 
     
@@ -18,7 +19,7 @@ export default function UserSearchCard({username, firstname, lastname, posts, fo
           <div className="card">
             <div className="card-body text-center">
               <img src={pictureServices.getPicture(pictureId || 1)} style={{width:"100px"}} alt="User" className="img-fluid img-thumbnail rounded-circle border-0 mb-3"/>
-              <a href={"/profile/"+username}><h5 className="card-title">{firstname} {lastname}</h5></a>
+              <a onClick={(e: any) => navigate(`/profile/${username}`)}><h5 className="card-title">{firstname} {lastname}</h5></a>
               <p className="text-secondary mb-1">@{username}</p>
             </div>
             <div className="card-footer">
