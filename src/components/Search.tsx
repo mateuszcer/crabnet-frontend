@@ -34,11 +34,11 @@ export default function Search() {
   return (
     <React.StrictMode>
         <Navbar/>
-        <div className="container">
-<div className="main-body">
-<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm gedf-wrapper">
+        <div className="container search-container">
+          <div className="main-body">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm gedf-wrapper">
         
-        {users.map((user: User) => user.username != state.username ? <UserSearchCard key={user.username} {...user} /> : <></>)}
+            {users.map((user: User) => user.username != state.username ? <UserSearchCard key={user.username} {...user} /> : <></>)}
         </div>
     </div>
     </div>

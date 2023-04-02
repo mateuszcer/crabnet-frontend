@@ -35,8 +35,16 @@ textarea {
 
 .posts {
     margin-top: 50px;
+    display: flex;
+    flex-grow: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px 0px 0px;
     
-    padding: 20px 40px 0px 40px;
+}
+
+.posts .post {
+    width: 100%;
 }
 
 

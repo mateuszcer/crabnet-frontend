@@ -3,6 +3,7 @@ const PostInfoDefault = {
     authorUsername: "",
     creationTime: "",
     likedBy: [],
+    comments: [],
     id: 0,
     authorPictureId: 1
 }

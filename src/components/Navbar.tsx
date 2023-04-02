@@ -30,7 +30,7 @@ export default function Navbar() {
     
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white nav-wrapper" >
         <div className="navbar-container">
           <div className="brand-container">  
             <a href="/dashboard" className="navbar-brand font-weight-normal"><p className="h3"><b className="text-danger">Crab</b><b>Net</b></p></a>

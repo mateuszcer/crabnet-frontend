@@ -7,6 +7,7 @@ export const useLogout = () => {
     
     const logout = async () => {
         localStorage.removeItem("auth")    
+        localStorage.removeItem("user_info") 
         dispatch({type: "LOGOUT"})
     }
 

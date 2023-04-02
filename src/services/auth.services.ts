@@ -31,7 +31,7 @@ class AuthService {
                 "lastname": lastname,
                 "gender": gender,
                 "password": password,
-                "pictureId": gender == "Male" ? 1 : 3
+                "pictureId": gender == "Male" ? 1 : 4
             })
             .then(response => {
                 return response;

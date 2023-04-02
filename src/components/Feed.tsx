@@ -17,7 +17,7 @@ export default function Feed() {
     const [userInfo, setUserInfo] = useState<User>();
     const {logout} = useLogout()
     const [posts, setPosts] = useState<Array<PostInfo>>([]);
-    const {comparePosts, formatPublishedTime} = userPostServices 
+    const {comparePosts } = userPostServices 
 
    
 
@@ -29,7 +29,7 @@ export default function Feed() {
                 const res = await userPostServices.getNewestPosts(username)
 
                 if(res.status == 200) {
-                    console.log(res.data)
+                    
                     fetchedPosts.push(res.data)
                 }
                 else if(res.status == 401) {
@@ -46,16 +46,14 @@ export default function Feed() {
     <div>
 
 
-    <div className="container gedf-wrapper">
+    <div className="container gedf-wrapper main-container">
         <div className="row">
             <UserCard/>
             <div className="col-md-6 mt-4 gedf-main">
 
             
                 <PostCreator posts={posts || []} setPosts={setPosts}/>
-                {posts?.map(post => <UserPost id={post.id} key={post.id} authorUsername={post.authorUsername} content={post.content} 
-                creationTime={post.creationTime} 
-                likedBy={post.likedBy} authorPictureId={post.authorPictureId || 1}/>)}
+                {posts?.map(post => <UserPost {...post}/>)}
             </div>
             
             <div className="col-md-3 mt-3">

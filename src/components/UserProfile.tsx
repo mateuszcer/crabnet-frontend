@@ -80,8 +80,8 @@ export default function UserProfile() {
 
     <Navbar/>
     
-  <div className="container py-5 h-100 test">
-    <div className="row d-flex justify-content-center align-items-center test">
+  <div className="container py-5 h-100 ">
+    <div className="row d-flex justify-content-center align-items-center mt-5">
       <div className="col-md-12 col-xl-4">
 
         <div className="card" style={{borderRadius: "15px"}}>

@@ -4,7 +4,7 @@
 This is frontend of social media app project Crabnet
 
 
-[Checkout backend written is Spring](https://github.com/mateuszcer/crabnet-backend)
+[Checkout backend written in Spring](https://github.com/mateuszcer/crabnet-backend)
 
 
 ## Run Locally

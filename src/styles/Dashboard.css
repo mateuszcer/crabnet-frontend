@@ -45,15 +45,7 @@ body {
     justify-content: space-between;
 }
 
-.post-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.post {
-    margin-top: 10px;
-}
 
 .repo-links {
     display: flex;

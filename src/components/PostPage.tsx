@@ -6,10 +6,11 @@ import PostInfo from '../types/PostInfo'
 import PostInfoDefault from '../types/PostInfoDefault'
 import Navbar from './Navbar'
 import UserPost from './UserPost'
-
+import "../styles/UserPost.css"
 export default function PostPage() {
     const {id} = useParams()
     const [post, setPost] = useState<PostInfo>(PostInfoDefault)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const {logout} = useLogout()
     useEffect(() => {
         const getPost = async () => {
@@ -18,7 +19,8 @@ export default function PostPage() {
                 
                 
                 setPost(res.data)
-                return
+                setIsLoading(false)
+                
             }
             else if(res.status == 401) {
                 logout()
@@ -29,9 +31,16 @@ export default function PostPage() {
   return (
     <React.StrictMode>
         <Navbar/>
-    {
-        <UserPost {...post}/>
+        <div className="post-page">
+        {
+            isLoading ?
+            <></> 
+            :
+            <UserPost {...post}/>
         }
+        
+        </div>
+        
         </React.StrictMode>
   )
 }

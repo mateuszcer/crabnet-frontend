@@ -12,14 +12,19 @@ import Popup from 'reactjs-popup'
 import "../styles/UserPost.css"
 import { useNavigate } from 'react-router-dom'
 import userServices from '../services/user.services'
+import timeUtils from '../utils/time.utils'
+import Comment from './Comment'
+import CommentsContainer from './CommentsContainer'
 
 
-export default function UserPost({id, authorUsername, content, creationTime, likedBy, authorPictureId}: PostInfo ) {
-    const [likes, setLikes] = useState<number>(likedBy.length)
+export default function UserPost({id, authorUsername, content, creationTime, likedBy, comments, authorPictureId}: PostInfo ) {
     const {state} = useAuthContext()
     const [isLiked, setIsLiked] = useState<boolean>(likedBy.includes(state.username || ""))
     const [isMine, setIsMine] = useState<boolean>(authorUsername === state.username)
     const [isVisible, setIsVisible] = useState<boolean>(true)
+    const [showComments, setShowComments] = useState<boolean>(false)
+    const [likes, setLikes] = useState<number>(likedBy.length)
+
     const postUrl = "http://127.0.0.1:5173/post/" + id
     const navigate = useNavigate()
     const handleLike = async (e: any) => {
@@ -64,7 +69,7 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
     
     {
         isVisible ?
-    <div className="card gedf-card post">
+            <div className="card gedf-card post">
                     <div className="card-header">
                         <div className="card-header-container">
                                 <div className="post-info">
@@ -74,14 +79,14 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
                                     </div>
 
                                     <div className="ml-2">
-                                        <div className="h5 m-0">@{authorUsername}</div>
+                                        <div className="m-0 author-username">@{authorUsername}</div>
                                         
                                     </div>
 
                                     </div>
                                     {
                                     userServices.isFollowed(authorUsername) ?
-                                    <p>
+                                    <p className="following-indicator">
                                         Following
                                     </p>
                                     :
@@ -113,43 +118,67 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
 
                     </div>
                     <div className="card-body">
-                        <div className="text-muted h7 mb-2 time"> <FontAwesomeIcon size="xs" icon={faClock} /><p>{userPostServices.formatPublishedTime(creationTime)} </p></div>
+                        <div className="text-muted h7 mb-2 time"> <FontAwesomeIcon size="xs" icon={faClock} /><p>{timeUtils.formatPublishedTime(creationTime)} </p></div>
                 
                         <p className="card-text">
                             {content}
                         </p>
                     </div>
                     <div className="post-footer">
-                        <div className="post-footer-action">
+                        <div className="counters">
+                            <div className="like-counter">
+                                <FontAwesomeIcon color="rgb(223, 71, 89, .88) " size="sm" icon={faHeart}/>
+                                <p>{likes}</p>
+                            </div>
+                        <div className="comments-counter" onClick={e => setShowComments(!showComments)}>
+                            <p>{comments.length}</p>
+                            <FontAwesomeIcon  size="sm" icon={faComment} />
+                        </div>
 
-                            <div>{likes}</div>
-                            <div className="action like-action" onClick={isLiked ? handleDislike : handleLike}>
-                            {isLiked ?
-                                <button className="btn" >
-                                <FontAwesomeIcon color="#df4759 "  icon={faHeart} />
-                                    </button>
-                                    :
-                                    <button className="btn like-control" >
-                                <FontAwesomeIcon   icon={faHeart} />
-                                    </button>
-                            }    
-                            <p>Like</p>
+                        </div>
+                        <div className="post-footer-actions">
+
+                            <div className="post-footer-action">
+                                
+                                <div className="action like-action" onClick={isLiked ? handleDislike : handleLike}>
+                                {isLiked ?
+                                    <button className="btn" >
+                                    <FontAwesomeIcon color="#df4759 "  icon={faHeart} />
+                                        </button>
+                                        :
+                                        <button className="btn like-control" >
+                                    <FontAwesomeIcon   icon={faHeart} />
+                                        </button>
+                                }    
+                                <p>Like</p>
+                                </div>
+
                             </div>
                             
-                        </div>
-                        
-                        <div className="post-footer-action">
-                            <div className="action">
+                            <div className="post-footer-action">
+                                <div className="action" onClick={e => setShowComments(!showComments)}>
 
-                                <button className="btn">
-                                    <FontAwesomeIcon  icon={faComment} />
-                                </button>
-                                <p>Comment</p>
+                                    <button className="btn">
+                                        <FontAwesomeIcon  icon={faComment} />
+                                    </button>
+                                    <p>Comment</p>
+                                </div>
                             </div>
+
                         </div>
+
+                        
+
               
                        
                     </div>
+                    {
+                        showComments ?
+                        <CommentsContainer comments={comments} sourceId={id}/>
+                    :
+                    <></>
+                    }
+                    
                 </div>
                 :
                 <></>}
