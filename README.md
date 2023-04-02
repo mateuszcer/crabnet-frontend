@@ -34,3 +34,6 @@ Start the server
   npm run dev
 ```
 
+## Demo
+
+![demo picture](https://github.com/mateuszcer/crabnet-frontend/blob/main/src/assets/demo.png)
