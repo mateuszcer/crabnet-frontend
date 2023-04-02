@@ -4,7 +4,7 @@ import PostInfo from "../types/PostInfo";
 import timeUtils from "../utils/time.utils";
 import authServices from "./auth.services";
 import TokenService from "./token.services";
-const API_URL = "http://localhost:8080/user_post";
+const API_URL = "https://crabnet-app.herokuapp.com/user_post";
 const CREATE_ENDPOINT = API_URL + "/create";
 const NEWEST_ENDPOINT = API_URL + "/newest"
 const LIKE_POST_ENDPOINT = API_URL + "/like"
