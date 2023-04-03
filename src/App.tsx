@@ -17,10 +17,6 @@ import "./styles/Global.css"
 import PostPage from './components/PostPage'
 import ErrorPage from './components/ErrorPage'
 function App() {
-  const handleLogin = () => {
-    console.log(AuthService.login("admin", "admin"))
-    return true;
-  }
   
   return (
     <div className="App">
