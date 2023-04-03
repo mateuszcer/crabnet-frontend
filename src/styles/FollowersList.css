@@ -1,0 +1,64 @@
+
+
+.followers-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 300px;
+    
+    z-index: 10;
+    background-color: white;
+    
+    
+}
+
+.follower-list {
+    position: absolute;
+    top: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-right: 1px solid rgba(100, 100, 100, 0.212);
+    border-left: 1px solid rgba(100, 100, 100, 0.212);
+}
+
+.followers-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-top: 1px solid rgba(100, 100, 100, 0.212);
+    border-bottom: 1px solid rgba(100, 100, 100, 0.212);
+    
+}
+
+.followers-header p{
+    margin: 1px 0px 1px 4px;
+    
+}
+
+
+.close-icon {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.follower-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: 60px;
+    z-index: 10;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.212);
+    color: #0275d8 ;
+    cursor: pointer;
+    
+
+}
+
+.follower-row img{
+    margin-right: 7px;
+}
+
+.follower-row h5{
+    margin: 0px;
+}

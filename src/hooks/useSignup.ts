@@ -11,10 +11,13 @@ export const useSignup = () => {
         setError(null)
 
         const response = await authServices.registerUser(email, username, firstname, lastname, password, gender)
-        if(response.status == 200){
-
+        if(!response) {
+            setError("Something went wrong, please try again")
             setIsLoading(false)
+        }
+        if(response.status == 200){
             dispatch({type: 'LOGIN', payload: response})
+            setIsLoading(false)
             return true
         }
         setIsLoading(false)

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import userServices from "../services/user.services"
+import MinimalUserInfo from "../types/MinimalUserInfo"
 import { useAuthContext } from "./useAuthContext"
 
 export const useFollow = (username: string) => {
@@ -7,7 +8,7 @@ export const useFollow = (username: string) => {
     const [error, setError] = useState<string>()
 
     useEffect(() => {
-      setFollowed(userServices.getFollowing().includes(username))
+      setFollowed(userServices.getFollowing().some((follower: MinimalUserInfo) => Object.values(follower).includes(username)))
       
 
     }, [])
@@ -20,9 +21,11 @@ export const useFollow = (username: string) => {
             const user_info = JSON.parse(localStorage.getItem("user_info") || '""')
             const following = user_info["following"]
             for( var i = 0; i < following.length; i++){ 
-    
-                if ( following[i] === username) { 
-
+                
+                if ( following[i].username === username) { 
+                    console.log(following[i])
+                    console.log(following[i].username)
+                    console.log(username)
                     following.splice(i, 1); 
                 }
             
@@ -34,14 +37,14 @@ export const useFollow = (username: string) => {
         setError("Something went wrong")
     }
 
-    const handleFollow = async (e: any) => {
+    const handleFollow = async (pictureId: number) => {
         setError("")
         const response = await userServices.follow(username || "");
         if(response.status == 200){
             setFollowed(true)
             const user_info = JSON.parse(localStorage.getItem("user_info") || '""')
             const following = user_info["following"]
-            following.push(username)
+            following.push({username: username, pictureId:pictureId})
             user_info["following"] = following
             localStorage.setItem("user_info", JSON.stringify(user_info))
             return;

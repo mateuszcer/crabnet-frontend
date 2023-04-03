@@ -27,7 +27,8 @@ export default function Feed() {
           
           const following = userServices.getFollowing()
           const fetchedPosts: Array<Array<PostInfo>> = []
-            for(const username of following) {
+            for(const user of following) {
+                const username = user.username
                 const res = await userPostServices.getNewestPosts(username)
 
                 if(res.status == 200) {

@@ -26,7 +26,7 @@ export default function UserSearchCard({username, firstname, lastname, posts, fo
               {followed ? 
               <button className="btn btn-sm btn-block btn btn-rounded btn-lg btn-danger" type="button" onClick={handleUnfollow}>Unfollow</button>
               :
-              <button className="btn btn-sm btn-block btn btn-rounded btn-lg btn-primary" type="button" onClick={handleFollow}>Follow</button>
+              <button className="btn btn-sm btn-block btn btn-rounded btn-lg btn-primary" type="button" onClick={(e: any) => handleFollow(pictureId)}>Follow</button>
               }
               {error && <div className="alert alert-danger mt-2" role="alert">
             {error}

@@ -46,7 +46,8 @@ export default function Navbar() {
             </form>
 
             <div className="mr-3 nav-profile-picture">
-                <img onClick={(e: any) => navigate(profileUrl)} src={pictureServices.getSelfPicture()}
+                <img onClick={(e: any) => navigate(profileUrl)} 
+      src={pictureServices.getSelfPicture()}
                   className="rounded-circle profile-picture" style={{width: "45px"}} />
             </div>
 

@@ -1,7 +1,9 @@
 import axios from "axios";
+import MinimalUserInfo from "../types/MinimalUserInfo";
 import authServices from "./auth.services";
 import TokenService from "./token.services";
-const API_URL = "https://crabnet-app.herokuapp.com/user";
+const API_URL = "http://localhost:8080/user"
+// const API_URL = "https://crabnet-app.herokuapp.com/user";
 const FOLLOW_ENDPOINT = API_URL + "/follow";
 const UNFOLLOW_ENDPOINT = API_URL + "/unfollow";
 const ALL_USER_PATTERN_ENDPOINT = API_URL + "/all/";
@@ -23,11 +25,11 @@ class UserServices {
     }
 
     isFollowed(username: string) {
-        return this.getFollowing().includes(username)
+        return this.getFollowing().some((follower: MinimalUserInfo) => Object.values(follower).includes(username))
     }
 
     isFollowing(username: string) {
-        return this.getFollowers().includes(username)
+        return this.getFollowers().some((follower: MinimalUserInfo) => Object.values(follower).includes(username))
     }
 
     getFollowers() {

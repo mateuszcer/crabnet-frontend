@@ -12,6 +12,11 @@ export const useLogin = () => {
         setError(null)
 
         const response = await authServices.login(email, password)
+
+        if(!response) {
+            setError("Something went wrong, please try again")
+            setIsLoading(false)
+        }
         if(response.status == 200) {
             await userServices.getSelfInfo()
             dispatch({type: 'LOGIN', payload: response.data})

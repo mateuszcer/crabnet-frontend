@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import "../styles/Login.css"
 import userServices from '../services/user.services'
 import authServices from '../services/auth.services'
 import { useNavigate } from 'react-router-dom'
 import { useSignup } from '../hooks/useSignup'
+import Loading from './Loading'
 
 function RegisterPage() {
     const navigate = useNavigate();
@@ -30,6 +31,10 @@ function RegisterPage() {
 }
 
   return (
+    <React.StrictMode>
+      {isLoading ? 
+      <Loading/>
+      :
     <div className="Auth-form-container">
       <form className="Auth-form" onSubmit={handleSubmit}>
         <div className="Auth-form-content">
@@ -106,7 +111,8 @@ function RegisterPage() {
           </p>
         </div>
       </form>
-    </div>
+    </div>}
+    </React.StrictMode>
   )
 }
 

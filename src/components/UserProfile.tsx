@@ -19,6 +19,8 @@ import PicturePicker from './PicturePicker';
 import UserPost from './UserPost';
 import userPostServices from '../services/userPost.services';
 import Loading from './Loading';
+import FollowerRow from './FollowersRow';
+import FollowersList from './FollowersList';
 
 export default function UserProfile() {
     const [userInfo, setUserInfo] = useState<UserInfo>();
@@ -31,7 +33,10 @@ export default function UserProfile() {
     const [bioError, setBioError] = useState<string>()
     const [bio, setBio] = useState<string>("")
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [showFollowing, setShowFollowing] = useState<boolean>(false)
+    const [showFollowers, setShowFollowers] = useState<boolean>(false)
     const navigate = useNavigate()
+    
     const handleBioChange = async (e: any) => {
       if(!edit){
         setEdit(true)
@@ -57,6 +62,9 @@ export default function UserProfile() {
       
     }
     useEffect(() => {
+        setShowFollowers(false)
+        setShowFollowing(false)
+      
         const getUserInfo = async () => {
           const res = await UserServices.getUserInfo(username || "")
           
@@ -76,7 +84,7 @@ export default function UserProfile() {
           setIsLoading(false)
         } 
         getUserInfo();
-      }, [])
+      }, [username])
 
 
   return (
@@ -135,7 +143,7 @@ export default function UserProfile() {
               Unfollow
             </button>
               :
-              <button onClick={handleFollow} type="button" className="btn btn-primary btn-rounded ">
+              <button onClick={(e: any) => handleFollow(userInfo?.pictureId || 1)} type="button" className="btn btn-primary btn-rounded ">
               Follow
             </button>)
             }
@@ -147,11 +155,19 @@ export default function UserProfile() {
                 <p className="mb-2 h5">{userInfo?.posts.length}</p>
                 <p className="text-muted mb-0">Posts created</p>
               </div>
-              <div className="px-3">
+
+              
+                <div className="px-3" onClick={(e: any) => {setShowFollowers(false); setShowFollowing(!showFollowing)}}>
                 <p className="mb-2 h5">{userInfo?.following.length}</p>
+                
                 <p className="text-muted mb-0">Following</p>
               </div>
-              <div className="px-3">
+
+              
+              { showFollowing &&  <FollowersList followers={userInfo?.following || []} name="Following" show={setShowFollowing}/>}
+              { showFollowers &&  <FollowersList followers={userInfo?.followers || []} name="Followers" show={setShowFollowers}/>}
+                
+              <div className="px-3" onClick={(e: any) => {setShowFollowing(false); setShowFollowers(!showFollowers)}}>
                 <p className="mb-2 h5">{userInfo?.followers.length}</p>
                 <p className="text-muted mb-0">Followers</p>
               </div>

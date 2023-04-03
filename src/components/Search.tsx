@@ -16,15 +16,20 @@ export default function Search() {
     const navigate = useNavigate()
     const {state} = useAuthContext()
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [error, setError] = useState<string>("")
     useEffect(() => {
         const getUsers = async () => {
           const res = await userServices.getAllUsersByPattern(pattern || "");
-          
+          if(!res) {
+            setError("Something went wrong, please try again")
+            setIsLoading(false)
+          }
           if(res.status == 401) {
             logout()
             return
           }
           if(res.status == 200){
+            setError("")
             setUsers(res.data)
             setIsLoading(false)
           }
@@ -44,12 +49,19 @@ export default function Search() {
         
 
         <div className="container search-container">
-          <div className="main-body">
+          {
+            error ?
+            <div className="alert alert-danger mt-2" role="alert">
+              {error}
+              </div>
+              :
+            <div className="main-body">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm gedf-wrapper">
         
             {users.map((user: User) => user.username != state.username ? <UserSearchCard key={user.username} {...user} /> : <></>)}
             </div>
           </div>
+          }
         </div>
         }
     </React.StrictMode>
