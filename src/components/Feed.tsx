@@ -11,6 +11,7 @@ import userPostServices from "../services/userPost.services";
 import pictureServices from "../services/picture.services";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCodeBranch, faBug} from "@fortawesome/free-solid-svg-icons";
+import Loading from "./Loading";
 
 export default function Feed() {
 
@@ -18,7 +19,7 @@ export default function Feed() {
     const {logout} = useLogout()
     const [posts, setPosts] = useState<Array<PostInfo>>([]);
     const {comparePosts } = userPostServices 
-
+    const [isLoading, setIsLoading] = useState<boolean>(true)
    
 
     useEffect(() => {
@@ -30,7 +31,6 @@ export default function Feed() {
                 const res = await userPostServices.getNewestPosts(username)
 
                 if(res.status == 200) {
-                    
                     fetchedPosts.push(res.data)
                 }
                 else if(res.status == 401) {
@@ -39,6 +39,7 @@ export default function Feed() {
             }
             const postsToRender = fetchedPosts.flat().sort(comparePosts)
             setPosts(postsToRender)
+            setIsLoading(false)
           
         } 
         getUserInfo();
@@ -46,6 +47,10 @@ export default function Feed() {
       
     return (
     <div>
+        {
+            isLoading ?
+            <Loading/>
+            :
 
 
     <div className="container gedf-wrapper main-container">
@@ -84,6 +89,7 @@ export default function Feed() {
             </div>
         </div>
     </div>
+    }
     </div>
     )
 }

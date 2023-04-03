@@ -4,7 +4,7 @@ import UserInfo from "../types/UserInfo"
 import { useState } from 'react';
 import UserServices from '../services/user.services';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import Navbar from './Navbar';
 import userServices from '../services/user.services';
@@ -18,6 +18,7 @@ import pictureServices from '../services/picture.services';
 import PicturePicker from './PicturePicker';
 import UserPost from './UserPost';
 import userPostServices from '../services/userPost.services';
+import Loading from './Loading';
 
 export default function UserProfile() {
     const [userInfo, setUserInfo] = useState<UserInfo>();
@@ -29,6 +30,8 @@ export default function UserProfile() {
     const [content, setContent] = useState<string>("")
     const [bioError, setBioError] = useState<string>()
     const [bio, setBio] = useState<string>("")
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const navigate = useNavigate()
     const handleBioChange = async (e: any) => {
       if(!edit){
         setEdit(true)
@@ -61,6 +64,8 @@ export default function UserProfile() {
             logout()
             return
           }
+          if(res.status != 200)
+            navigate("/")
           if(res.data.username === AuthService.getUsername()){
             setIsMe(true)
           }
@@ -68,14 +73,18 @@ export default function UserProfile() {
           setUserInfo(res.data)
           setBio(res.data["bio"])
           setContent(res.data["bio"])
+          setIsLoading(false)
         } 
         getUserInfo();
       }, [])
 
 
   return (
+      
     <React.StrictMode>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" ></link>
+      {isLoading ?
+      <Loading/>
+      :
     <section className="vh-100 test" style={{backgroundColor: "#eee"}}>
 
     <Navbar/>
@@ -158,6 +167,7 @@ export default function UserProfile() {
     </div>
   </div>
 </section>
+  }
     </React.StrictMode>
   )
 }

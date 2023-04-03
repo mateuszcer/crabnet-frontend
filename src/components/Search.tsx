@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import UserSearchCard from './UserSearchCard'
 import "../styles/UserSearchCard.css"
 import { useAuthContext } from '../hooks/useAuthContext';
+import Loading from './Loading';
 export default function Search() {
 
     const [users, setUsers] = useState<Array<User>>([])
@@ -14,7 +15,7 @@ export default function Search() {
     const {logout} = useLogout()
     const navigate = useNavigate()
     const {state} = useAuthContext()
-
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     useEffect(() => {
         const getUsers = async () => {
           const res = await userServices.getAllUsersByPattern(pattern || "");
@@ -23,8 +24,10 @@ export default function Search() {
             logout()
             return
           }
-
-          setUsers(res.data)
+          if(res.status == 200){
+            setUsers(res.data)
+            setIsLoading(false)
+          }
         } 
         getUsers();
       }, [])
@@ -33,15 +36,22 @@ export default function Search() {
 
   return (
     <React.StrictMode>
-        <Navbar/>
+      <Navbar/>
+      {
+        isLoading ?
+        <Loading/>
+        :
+        
+
         <div className="container search-container">
           <div className="main-body">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm gedf-wrapper">
         
             {users.map((user: User) => user.username != state.username ? <UserSearchCard key={user.username} {...user} /> : <></>)}
+            </div>
+          </div>
         </div>
-    </div>
-    </div>
+        }
     </React.StrictMode>
   )
 }

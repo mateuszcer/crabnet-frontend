@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import "../styles/Login.css"
 import AuthService from "../services/auth.services"
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Popup from 'reactjs-popup';
 import { render } from 'react-dom'
 import { useLogin } from '../hooks/useLogin'
-
+import Loading from './Loading'
 function LoginPage() {
   const navigate = useNavigate()
   const {login, error, isLoading} = useLogin();
@@ -23,6 +23,13 @@ function LoginPage() {
   }
 
   return (
+    <React.StrictMode>
+
+    
+    {
+      isLoading ?
+      <Loading/>
+      :
     <div className="Auth-form-container">
       <form className="Auth-form" onSubmit={handleSubmit}>
         <div className="Auth-form-content">
@@ -57,6 +64,8 @@ function LoginPage() {
         </div>
       </form>
     </div>
+    }
+    </React.StrictMode>
   )
 }
 
