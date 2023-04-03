@@ -1,1 +1,1 @@
-export const API = "https://crabnet-app.herokuapp.com";
+export const API = "https://crabnet-app.herokuapp.com"

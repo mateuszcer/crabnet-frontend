@@ -7,6 +7,11 @@ This is frontend of social media app project Crabnet
 [Checkout backend written in Spring](https://github.com/mateuszcer/crabnet-backend)
 
 
+## Try it
+Frontend is deployed to Netlify and backend to heroku
+
+https://crabnet.netlify.app/
+
 ## Run Locally
 
 Clone the project

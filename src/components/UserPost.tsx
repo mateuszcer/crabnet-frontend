@@ -10,7 +10,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { Dropdown } from 'react-bootstrap'
 import Popup from 'reactjs-popup'
 import "../styles/UserPost.css"
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import userServices from '../services/user.services'
 import timeUtils from '../utils/time.utils'
 import Comment from './Comment'
@@ -27,7 +27,7 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
     const [likes, setLikes] = useState<number>(0)
     const [commentsArr, setCommentsArr] = useState<Array<CommentInfo>>([])
 
-    const postUrl = "http://127.0.0.1:5173/post/" + id
+    
     const navigate = useNavigate()
     const handleLike = async (e: any) => {
         const res = await userPostServices.likePost(id)
@@ -40,10 +40,6 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
         
     }
 
-    const handleShareLink = (e: any) => {
-        navigator.clipboard.writeText(postUrl)
-        return postUrl
-    }
 
     const handleDislike = async (e: any) => {
         const res = await userPostServices.dislikePost(id)
@@ -112,7 +108,7 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
                                         <Popup trigger={
                                             <Dropdown.Item >Share post link</Dropdown.Item>
                                           } position="bottom center">
-                                            <div>{postUrl} copy url</div>  
+                                            <Navigate to={`/post/${id}`}/>  
                                             </Popup>
                                           
                                             {isMine ? 
