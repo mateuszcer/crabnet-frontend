@@ -20,7 +20,7 @@ export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, 
         if(response.status == 200)
             setPosts([response.data, ...posts])
         else {
-            setError("Post content should be a maximum of 255 characters in size!")
+            setError("Post content size should be between 1 and 255 characters in length!")
         }
     }
 
@@ -37,13 +37,10 @@ export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, 
                         <form onSubmit={submitPost}>
 
                         <div className="tab-content" id="myTabContent">
-                            <div className="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div className="form-group">
                                     <label className="sr-only" htmlFor="message">post</label>
                                     <textarea className="form-control" id="message" rows={3} placeholder="What are you thinking?" onInput={e => handleInput(e)}></textarea>
                                 </div>
-
-                            </div>
                         </div>
                         <div className="btn-toolbar justify-content-between">
                             <div className="btn-group">

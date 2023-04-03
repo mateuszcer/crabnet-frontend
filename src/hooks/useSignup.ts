@@ -9,7 +9,11 @@ export const useSignup = () => {
     const signup = async (email: string, username: string, firstname: string, lastname: string, password: string, gender: string) => {
         setIsLoading(true)
         setError(null)
-
+        if(username.indexOf(' ') >= 0) {
+            setError("Username must not contain any white spaces!")
+            setIsLoading(false)
+            return false
+        }
         const response = await authServices.registerUser(email, username, firstname, lastname, password, gender)
         if(!response) {
             setError("Something went wrong, please try again")

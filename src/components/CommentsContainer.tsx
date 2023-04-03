@@ -20,7 +20,7 @@ export default function CommentsContainer({comments: commentsArray, sourceId: po
             setError("")
         }
         else {
-            setError("Comment should be a maximum of 100 characters in size!")
+            setError("Comment content size should be between 1 and 100 characters in length!")
             setContent("")
         }
     }
