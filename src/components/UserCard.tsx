@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import userServices from '../services/user.services';
 import User from '../types/UserInfo';
@@ -6,6 +7,7 @@ import User from '../types/UserInfo';
 export default function UserCard() {
     const [userInfo, setUserInfo] = useState<User>();
     const {logout} = useLogout()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -25,7 +27,7 @@ export default function UserCard() {
     <div className="col-md-3 mt-3">
                 <div className="card">
                     <div className="card-body">
-                        <div className="h5">@{userInfo?.username}</div>
+                        <div className="h5" style={{color: "#0275d8", cursor:'pointer'}} onClick={(e:any) => {navigate(`/profile/${userInfo?.username}`)}}>@{userInfo?.username}</div>
                         <div className="h7 text-muted">Fullname : {userInfo?.firstname} {userInfo?.lastname}</div>
                     </div>
                     <ul className="list-group list-group-flush">
