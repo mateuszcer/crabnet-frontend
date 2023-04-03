@@ -6,7 +6,7 @@
     max-width: 400px;
     width: 300px;
     
-    z-index: 10;
+    z-index: 5;
     background-color: white;
     
     
@@ -14,10 +14,11 @@
 
 .follower-list {
     position: absolute;
-    top: 50px;
+    top: 65px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-right: 1px solid rgba(100, 100, 100, 0.212);
     border-left: 1px solid rgba(100, 100, 100, 0.212);
+    z-index: 5;
 }
 
 .followers-header {

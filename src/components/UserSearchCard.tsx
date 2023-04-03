@@ -17,9 +17,9 @@ export default function UserSearchCard({username, firstname, lastname, posts, fo
       
         <div className="col mb-3">
           <div className="card">
-            <div className="card-body text-center">
+            <div className="card-body text-center search-card-body" onClick={(e: any) => navigate(`/profile/${username}`)}>
               <img src={pictureServices.getPicture(pictureId || 1)} style={{width:"100px"}} alt="User" className="img-fluid img-thumbnail rounded-circle border-0 mb-3"/>
-              <a onClick={(e: any) => navigate(`/profile/${username}`)}><h5 className="card-title">{firstname} {lastname}</h5></a>
+              <h5 className="card-title">{firstname} {lastname}</h5>
               <p className="text-secondary mb-1">@{username}</p>
             </div>
             <div className="card-footer">

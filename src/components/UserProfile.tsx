@@ -157,19 +157,19 @@ export default function UserProfile() {
               </div>
 
               
-                <div className="px-3" onClick={(e: any) => {setShowFollowers(false); setShowFollowing(!showFollowing)}}>
+                <div className="px-3 follow-control" >
                 <p className="mb-2 h5">{userInfo?.following.length}</p>
                 
-                <p className="text-muted mb-0">Following</p>
+                <p className="text-muted mb-0  follow-link" onClick={(e: any) => {setShowFollowers(false); setShowFollowing(!showFollowing)}}>Following</p>
               </div>
 
               
               { showFollowing &&  <FollowersList followers={userInfo?.following || []} name="Following" show={setShowFollowing}/>}
               { showFollowers &&  <FollowersList followers={userInfo?.followers || []} name="Followers" show={setShowFollowers}/>}
                 
-              <div className="px-3" onClick={(e: any) => {setShowFollowing(false); setShowFollowers(!showFollowers)}}>
+              <div className="px-3 follow-control" >
                 <p className="mb-2 h5">{userInfo?.followers.length}</p>
-                <p className="text-muted mb-0">Followers</p>
+                <p className="text-muted mb-0 follow-link" onClick={(e: any) => {setShowFollowing(false); setShowFollowers(!showFollowers)}}>Followers</p>
               </div>
             </div>
           </div>
