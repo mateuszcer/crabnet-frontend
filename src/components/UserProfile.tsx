@@ -28,13 +28,13 @@ export default function UserProfile() {
     const {username} = useParams();
     const {logout} = useLogout()
     const [edit, setEdit] = useState<boolean>(false)
-    const {handleFollow, handleUnfollow, error, followed} = useFollow(username || "")
     const [content, setContent] = useState<string>("")
     const [bioError, setBioError] = useState<string>()
     const [bio, setBio] = useState<string>("")
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [showFollowing, setShowFollowing] = useState<boolean>(false)
     const [showFollowers, setShowFollowers] = useState<boolean>(false)
+    const {handleFollow, handleUnfollow, error, followed, setFollowed} = useFollow(username || "")
     const navigate = useNavigate()
     
     const handleBioChange = async (e: any) => {
@@ -64,7 +64,8 @@ export default function UserProfile() {
     useEffect(() => {
         setShowFollowers(false)
         setShowFollowing(false)
-      
+        setIsMe(false)
+        setIsLoading(true)
         const getUserInfo = async () => {
           const res = await UserServices.getUserInfo(username || "")
           
@@ -81,6 +82,7 @@ export default function UserProfile() {
           setUserInfo(res.data)
           setBio(res.data["bio"])
           setContent(res.data["bio"])
+          setFollowed(userServices.isFollowed(res.data["username"]))
           setIsLoading(false)
         } 
         getUserInfo();

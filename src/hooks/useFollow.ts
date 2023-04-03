@@ -23,9 +23,6 @@ export const useFollow = (username: string) => {
             for( var i = 0; i < following.length; i++){ 
                 
                 if ( following[i].username === username) { 
-                    console.log(following[i])
-                    console.log(following[i].username)
-                    console.log(username)
                     following.splice(i, 1); 
                 }
             
@@ -54,5 +51,5 @@ export const useFollow = (username: string) => {
       
   }
 
-  return {followed, error, handleFollow, handleUnfollow}
+  return {followed, setFollowed, error, handleFollow, handleUnfollow}
 }
