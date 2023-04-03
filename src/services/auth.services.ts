@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { API } from "./api_url";
 import TokenService from "./token.services";
 import userServices from "./user.services";
-const API_URL = "http://localhost:8080/auth"
-//const API_URL = "https://crabnet-app.herokuapp.com/auth";
+
+const API_URL = API + "/auth";
 const LOGIN_ENDPOINT = API_URL + "/signin";
 const REGISTER_ENDPOINT = API_URL + "/signup";
 class AuthService {

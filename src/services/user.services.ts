@@ -1,9 +1,10 @@
 import axios from "axios";
 import MinimalUserInfo from "../types/MinimalUserInfo";
+import { API } from "./api_url";
 import authServices from "./auth.services";
 import TokenService from "./token.services";
-const API_URL = "http://localhost:8080/user"
-// const API_URL = "https://crabnet-app.herokuapp.com/user";
+
+const API_URL = API+ "/user";
 const FOLLOW_ENDPOINT = API_URL + "/follow";
 const UNFOLLOW_ENDPOINT = API_URL + "/unfollow";
 const ALL_USER_PATTERN_ENDPOINT = API_URL + "/all/";
