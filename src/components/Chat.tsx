@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs'
-import authServices from '../services/auth.services';
 import chatMessagesServices from '../services/chatMessages.services';
 import pictureServices from '../services/picture.services';
 import tokenServices from '../services/token.services';
-import userServices from '../services/user.services';
 import ChatMessage from '../types/ChatMessage';
 import UserMessage from './UserMessage';
 import "../styles/ChatRoom.css"
@@ -55,7 +53,7 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
        }
 
        useEffect(() => {
-        console.log("xd")
+        
         connect();
         
        }, [])
@@ -64,7 +62,7 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
         const getMessages = async () => {
           const res = await chatMessagesServices.getMessages(username || "")
 
-          console.log(res)
+          
           if(res.status == 200) {
             setMessages([...res.data.sort(chatMessagesServices.compareMessages)])
             setIsLoading(false)
