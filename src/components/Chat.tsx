@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import * as SockJS from 'sockjs-client';
-import * as Stomp from 'stompjs'
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs'
 import chatMessagesServices from '../services/chatMessages.services';
 import pictureServices from '../services/picture.services';
 import tokenServices from '../services/token.services';
