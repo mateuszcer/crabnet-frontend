@@ -30,8 +30,8 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
     
   }
     const connect = () => {
-      
-        let socket = new SockJS(`${API}/chat?access_token=${tokenServices.getToken()}`);
+        let token = tokenServices.getToken();
+        let socket = new SockJS("https://crabnet-app.herokuapp.com/chat?access_token=" + token);
         let xstompClient = Stomp.over(socket);
         
         xstompClient.connect({}, function (frame: any) {
