@@ -16,12 +16,16 @@ import Search from './components/Search'
 import "./styles/Global.css"
 import PostPage from './components/PostPage'
 import ErrorPage from './components/ErrorPage'
+
+import ChatRoom from './components/ChatRoom'
+
 function App() {
   
   return (
     <div className="App">
       <Routes>
         <Route path="/login" element={<LoginPage />}/>
+        <Route path="/chat" element={<ChatRoom />}/>
         
         <Route path="/signup/confirm" element={<ConfirmSignup/>}/>
         <Route path="/signup" element={<RegisterPage/>}/>
@@ -51,6 +55,11 @@ function App() {
         <Route path="/profile/:username" element={
         <RequireAuth>
           <UserProfile />
+        </RequireAuth>
+        }/>
+        <Route path="/chat/:username" element={
+        <RequireAuth>
+          <ChatRoom />
         </RequireAuth>
         }/>
         <Route

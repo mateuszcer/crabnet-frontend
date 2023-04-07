@@ -12,6 +12,7 @@ import pictureServices from "../services/picture.services";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCodeBranch, faBug} from "@fortawesome/free-solid-svg-icons";
 import Loading from "./Loading";
+import ChatList from "./ChatList";
 
 export default function Feed() {
 
@@ -66,6 +67,8 @@ export default function Feed() {
             </div>
             
             <div className="col-md-3 mt-3">
+                <ChatList followers={userServices.getFollowing() || []}/>
+
                 <div className="card gedf-card">
                     <div className="card-body">
                         <h5 className="card-title">CrabNet is open source</h5>

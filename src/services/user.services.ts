@@ -45,6 +45,17 @@ class UserServices {
     getPictureId() {
         return JSON.parse(localStorage.getItem("user_info") || '""')["pictureId"]
     }
+
+    getSelfMinimalInfo() {
+        const info = JSON.parse(localStorage.getItem("user_info") || '""')
+        const user: MinimalUserInfo = {
+            username: info.username,
+            firstname: info.firstname,
+            lastname: info.lastname,
+            pictureId: info.pictureId
+        };
+        return user;
+    }
     
 
     async getUserInfo(username: string) {

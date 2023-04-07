@@ -18,6 +18,7 @@ class AuthService {
             .then(response => {
                 if (response.status == 200 && response.data.token) {
                   localStorage.setItem("auth", JSON.stringify(response.data));
+                  
                 }
                 return response;
               })
