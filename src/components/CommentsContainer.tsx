@@ -6,6 +6,7 @@ import Comment from './Comment'
 import "../styles/Comment.css"
 import pictureServices from '../services/picture.services'
 import userPostServices from '../services/userPost.services'
+import timeUtils from '../utils/time.utils'
 export default function CommentsContainer({comments: commentsArray, sourceId: postId}: {comments: Array<CommentInfo>, sourceId: number}) {
     const [comments, setComments] = useState<Array<CommentInfo>>(commentsArray)
     const [content, setContent] = useState<string>("")
@@ -15,7 +16,7 @@ export default function CommentsContainer({comments: commentsArray, sourceId: po
         const res = await userPostServices.createComment(content, postId)
         if(res.status == 200) {
             
-            setComments([...comments, res.data].sort(userPostServices.compareComments))
+            setComments([...comments, res.data].sort(timeUtils.compareObjectWithDate))
             setContent("")
             setError("")
         }
