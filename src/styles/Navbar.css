@@ -18,10 +18,27 @@
     transition: scale 0.2s;
 }
 
-@media screen and (max-width: 424px) {    .nav-profile-picture { display: none; } }
+@media screen and (max-width: 500px) {    .nav-profile-picture { display: none; } }
 
-@media screen and (max-width: 424px) 
-{    .nav-form { margin-right: 0px !important; } }
+@media screen and (max-width: 500px) 
+{    
+    .nav-form { margin-right: 0px !important; } 
+    .crabnet-logo {
+        margin-right: 10px !important;
+    }
+    .chat-room-icon {
+        margin: 0px 0px 0px 4px !important;
+        scale: .95;
+    }
+   
+
+    
+    .nav-wrapper {
+        padding: 3px ;
+    }
+    
+
+}
 .profile-picture:hover {
     scale: 1.05;
     
@@ -32,6 +49,7 @@
     top: 0;
     width: 100vw;
     z-index: 10;
+    padding: 6px;
 }
 
 .navbar-container {
@@ -39,6 +57,10 @@
     width: 100%;
     justify-content: space-between;
     z-index: 10;
+}
+
+.crabnet-logo {
+    cursor: pointer;
 }
 
 .navbar-controls {
@@ -53,4 +75,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.chat-room-icon {
+    margin: 0px 20px 0px 0px;
+    font-size: 1.55rem;
+    color: #3b72cae4  ;
+    /* border: 1px solid rgba(125, 125, 125, 0.5); */
+    border-radius: 100px;
+    padding: 5px;
+    cursor: pointer;
+    transition: scale .2s;
+}
+
+.chat-room-icon:hover {
+    scale: 1.08;
+    
+        
 }

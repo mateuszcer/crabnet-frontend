@@ -6,7 +6,7 @@ import authServices from '../services/auth.services'
 import userServices from '../services/user.services'
 import pictureServices from '../services/picture.services'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCog  } from '@fortawesome/free-solid-svg-icons'
+import { faCog, faComments  } from '@fortawesome/free-solid-svg-icons'
 import Dropdown from 'react-bootstrap/Dropdown';
 import "../styles/Navbar.css"
 
@@ -32,18 +32,20 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white nav-wrapper" >
         <div className="navbar-container">
-          <div className="brand-container" onClick={(e: any) => navigate("/dashboard")}>  
-            <a href="#" className="navbar-brand font-weight-normal"><p className="h3"><b className="text-danger">Crab</b><b>Net</b></p></a>
-          </div>
-        
-          <div className="navbar-controls">
-
+          <div className="brand-container" >  
+            <p className="h3 mr-4 mb-0 crabnet-logo" onClick={(e: any) => navigate("/dashboard")}><b className="text-danger">Crab</b><b>Net</b></p>
             <form className="form-inline nav-form mr-3" onSubmit={handleSubmit}>
                 <div className="input-group">
                     <input placeholder="Search for users"  onInput={handleInput} type="search" className="form-control" aria-label="Search" />
 
                 </div>
             </form>
+          </div>
+        
+          <div className="navbar-controls">
+            <FontAwesomeIcon icon={faComments} className="chat-room-icon" onClick={(e: any) => navigate("/chat/")}/>
+
+           
 
             <div className="mr-3 nav-profile-picture">
                 <img onClick={(e: any) => navigate(profileUrl)} 

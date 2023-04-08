@@ -3,8 +3,11 @@ import MinimalUserInfo from '../types/MinimalUserInfo'
 import "../styles/ChatList.css"
 import ContactRow from './ContactRow'
 export default function ChatList({followers}: {followers: Array<MinimalUserInfo>}) {
-    console.log(followers)
+    
     return (
+    <>
+        {followers.length > 0 ?
+        
         <div className="">
             <div className="followers-header">
                 <p>Chat</p>
@@ -15,6 +18,10 @@ export default function ChatList({followers}: {followers: Array<MinimalUserInfo>
             {followers.map((following, index) => <ContactRow  key={index} {...following}/>)}
         </div>
         </div>
+        :
+        <></>
+        }
+    </>
       )
 }
 

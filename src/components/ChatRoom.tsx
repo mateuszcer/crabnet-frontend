@@ -7,14 +7,27 @@ import MinimalUserInfoDefault from '../types/MinimalUserInfoDefault'
 import Chat from './Chat'
 import ChatRoomContact from './ChatRoomContact'
 import Navbar from './Navbar'
+import ErrorPage from './ErrorPage'
+import EmptyChatPage from './EmptyChatPage'
 export default function ChatRoom() {
     const {username} = useParams()
     const [currentUser, setCurrentUser] = useState<MinimalUserInfo>(MinimalUserInfoDefault)
-    
+    const [showChat, setShowChat] = useState<boolean>(false)
     useEffect(() => {
-        
-        const user = userServices.getFollowing().find((user: MinimalUserInfo) => Object.values(user).includes(username))
-        setCurrentUser(user)
+      const following = userServices.getFollowing()
+      
+        if(username != undefined){
+          
+          const user = following.find((user: MinimalUserInfo) => Object.values(user).includes(username))
+          setCurrentUser(user)
+          setShowChat(true)
+        }
+        else if(following.length > 0){
+          
+          setCurrentUser(following[0])
+          setShowChat(true)
+        }
+
     
     }, [username])
 
@@ -22,7 +35,8 @@ export default function ChatRoom() {
     <>
       <Navbar/>
 
-       
+      { showChat ? 
+
         <div className="row chat-wrapper">
      
               <div className="chat-container">
@@ -36,14 +50,13 @@ export default function ChatRoom() {
                     </ul>
                   </div>
 
-                <Chat {...currentUser}/>
+                
+                <Chat {...currentUser}/>      
             </div>
       </div>
-    
-        
-
-      
-
+      :
+      <EmptyChatPage/>
+    } 
       
 
     </>
