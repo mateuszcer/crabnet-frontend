@@ -14,6 +14,7 @@ import MinimalUserInfo from '../types/MinimalUserInfo';
 import ChatMessageDefault from '../types/ChatMessageDefault';
 import Loading from './Loading';
 import { API } from '../services/api_url';
+import timeUtils from '../utils/time.utils';
 
 
 export default function Chat({username, firstname, lastname, pictureId}: MinimalUserInfo) {
@@ -64,7 +65,7 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
 
           
           if(res.status == 200) {
-            setMessages([...res.data.sort(chatMessagesServices.compareMessages)])
+            setMessages([...res.data.sort(timeUtils.compareObjectWithDate)])
             setIsLoading(false)
           }
         } 

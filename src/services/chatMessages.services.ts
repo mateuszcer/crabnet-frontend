@@ -18,10 +18,7 @@ class ChatMessagesServices {
         .catch(error => error.response)
     }
 
-    compareMessages = (messageA: CommentInfo, messageB: CommentInfo) => {
-        return (timeUtils.calculatePublishedTime(messageA.creationTime) - timeUtils.calculatePublishedTime(messageB.creationTime))
-        
-    }
+  
 
 
 }

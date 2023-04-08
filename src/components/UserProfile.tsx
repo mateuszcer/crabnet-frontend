@@ -17,10 +17,9 @@ import { faPencil, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import pictureServices from '../services/picture.services';
 import PicturePicker from './PicturePicker';
 import UserPost from './UserPost';
-import userPostServices from '../services/userPost.services';
 import Loading from './Loading';
-import FollowerRow from './FollowersRow';
 import FollowersList from './FollowersList';
+import timeUtils from '../utils/time.utils';
 
 export default function UserProfile() {
     const [userInfo, setUserInfo] = useState<UserInfo>();
@@ -78,7 +77,7 @@ export default function UserProfile() {
           if(res.data.username === AuthService.getUsername()){
             setIsMe(true)
           }
-          res.data["posts"] = res.data["posts"].sort(userPostServices.comparePosts)
+          res.data["posts"] = res.data["posts"].sort(timeUtils.compareObjectWithDate)
           setUserInfo(res.data)
           setBio(res.data["bio"])
           setContent(res.data["bio"])

@@ -91,15 +91,7 @@ class UserPostServices {
 
 
 
-    comparePosts = (postA: PostInfo, postB: PostInfo) => {
-        return (timeUtils.calculatePublishedTime(postA.creationTime) - timeUtils.calculatePublishedTime(postB.creationTime))
-        
-    }
-    
-    compareComments = (commentA: CommentInfo, commentB: CommentInfo) => {
-        return (timeUtils.calculatePublishedTime(commentA.creationTime) - timeUtils.calculatePublishedTime(commentB.creationTime))
-        
-    }
+  
 
 
 

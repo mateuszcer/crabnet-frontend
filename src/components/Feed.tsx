@@ -13,13 +13,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCodeBranch, faBug} from "@fortawesome/free-solid-svg-icons";
 import Loading from "./Loading";
 import ChatList from "./ChatList";
+import timeUtils from "../utils/time.utils";
 
 export default function Feed() {
 
     const [userInfo, setUserInfo] = useState<User>();
     const {logout} = useLogout()
     const [posts, setPosts] = useState<Array<PostInfo>>([]);
-    const {comparePosts } = userPostServices 
     const [isLoading, setIsLoading] = useState<boolean>(true)
    
 
@@ -39,7 +39,8 @@ export default function Feed() {
                     logout()
                 }
             }
-            const postsToRender = fetchedPosts.flat().sort(comparePosts)
+            fetchedPosts.push(userServices.getSelfPosts())
+            const postsToRender = fetchedPosts.flat().sort(timeUtils.compareObjectWithDate)
             setPosts(postsToRender)
             setIsLoading(false)
           

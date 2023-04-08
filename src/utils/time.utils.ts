@@ -2,11 +2,11 @@ class TimeUtils {
 
 
         calculatePublishedTime = (creationTime: string) => {
-        return Math.floor((Date.now() - Date.parse(creationTime)) / (1000*60))
+        return (Date.now() - Date.parse(creationTime))
     }
 
     formatPublishedTime = (creationTime: string) => {
-        const timeInMin = this.calculatePublishedTime(creationTime)
+        const timeInMin = Math.floor(this.calculatePublishedTime(creationTime)/(1000*60))
         if(timeInMin >= 2880) {
             return Math.floor(timeInMin/1440) + " days ago"
         }
@@ -26,6 +26,11 @@ class TimeUtils {
             return "just now"
         }
         return timeInMin + " minutes ago"
+    }
+
+    compareObjectWithDate = (objA: {creationTime: string}, objB: {creationTime: string}) => {
+        return (this.calculatePublishedTime(objA.creationTime) - this.calculatePublishedTime(objB.creationTime))
+        
     }
 } 
 
