@@ -9,13 +9,19 @@ import ChatRoomContact from './ChatRoomContact'
 import Navbar from './Navbar'
 import ErrorPage from './ErrorPage'
 import EmptyChatPage from './EmptyChatPage'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleLeft, faArrowLeft, faArrowRight, faBars, faClose } from '@fortawesome/free-solid-svg-icons'
+import Loading from './Loading'
 export default function ChatRoom() {
     const {username} = useParams()
     const [currentUser, setCurrentUser] = useState<MinimalUserInfo>(MinimalUserInfoDefault)
     const [showChat, setShowChat] = useState<boolean>(false)
+    const [showContacts, setShowContacts] = useState<boolean>(false)
+    const [transitionend, setTransitionend] = useState<boolean>(false)
+    
     useEffect(() => {
       const following = userServices.getFollowing()
-      
+      setShowContacts(false)
         if(username != undefined){
           
           const user = following.find((user: MinimalUserInfo) => Object.values(user).includes(username))
@@ -30,7 +36,7 @@ export default function ChatRoom() {
 
     
     }, [username])
-
+    
   return (
     <>
       <Navbar/>
@@ -40,22 +46,42 @@ export default function ChatRoom() {
         <div className="row chat-wrapper">
      
               <div className="chat-container">
-                  <div data-mdb-perfect-scrollbar="true" className="chat-room-contacts">
+                  <div onTransitionEnd={(e: any) => setTransitionend(!showContacts)} data-mdb-perfect-scrollbar="true" className={showContacts ? "chat-room-contacts contacts-visible" : "chat-room-contacts hidden-room-contacts"}>
+                    
                     <div className="contact-header">
-                        <h5>Following</h5>
+                        <h5>{showContacts && "Chats"}</h5>
+                        <FontAwesomeIcon className="chat-list-control" icon={faAngleLeft} onClick={(e: any) => setShowContacts(!showContacts)}/>
                     </div>
-                    <ul className="list-unstyled mb-0 ">
+                    
+                    <ul className={showContacts ? "list-unstyled mb-0 contacts" : "list-unstyled mb-0 contacts hide-contancts"}>
                         {userServices.getFollowing().map((user: MinimalUserInfo, index: number) => <ChatRoomContact key={index} {...user}/>)}
                                
                     </ul>
+                    
+                    
+                    
+                    
+                    
                   </div>
+                  
+                    {
+                      userServices.getFollowing().length == 0 ? <></> : <></>
+                    }
+                  
 
-                
+                  <div className="messager-container" data-mdb-perfect-scrollbar="true">
+
                 <Chat {...currentUser}/>      
+                </div>
             </div>
       </div>
       :
-      <EmptyChatPage/>
+      <>
+      <Loading/>
+      {!userServices.getFollowing().length && <EmptyChatPage/>}
+      
+      </>
+
     } 
       
 

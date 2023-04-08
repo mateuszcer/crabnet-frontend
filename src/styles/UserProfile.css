@@ -33,6 +33,13 @@ textarea {
     border-radius: 75px;
 }
 
+.followed-controls {
+    display: flex;
+    
+    width: min-content;
+    flex-direction: column;
+}
+
 .posts {
     margin-top: 50px;
     display: flex;

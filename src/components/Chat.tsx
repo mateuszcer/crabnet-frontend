@@ -86,11 +86,11 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
     <>
       {isLoading  ?
       <Loading/> :
-    <div className="messager-container" data-mdb-perfect-scrollbar="true"
-    >
-      <div className="chat-header" onClick={(e: any) => navigate(`/profile/${username}`)}>
+      <>
+      
+      <div className="chat-header" >
         <img  src={pictureServices.getPicture(pictureId)}/>
-        <h5>{firstname} {lastname}</h5>
+        <h5 onClick={(e: any) => navigate(`/profile/${username}`)}>{firstname} {lastname}</h5>
       </div>
      
       <div className="pt-3 pe-3 messages">
@@ -106,7 +106,7 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
         <FontAwesomeIcon color="#3B71CA" icon={faPaperPlane} />
         </button>
       </form>
-    </div>
+      </>
     }
       </>
   )

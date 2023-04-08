@@ -13,7 +13,7 @@ import { useFollow } from '../hooks/useFollow';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faCheckCircle, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import pictureServices from '../services/picture.services';
 import PicturePicker from './PicturePicker';
 import UserPost from './UserPost';
@@ -140,9 +140,15 @@ export default function UserProfile() {
              :
              (
               followed ?
-              <button onClick={handleUnfollow} type="button" className="btn btn-primary btn-rounded btn-danger">
-              Unfollow
-            </button>
+              <div className="">
+                <button onClick={handleUnfollow} type="button" className="btn btn-primary btn-rounded btn-danger">
+                  Unfollow
+                </button>
+                <button onClick={(e: any) => navigate(`/chat/${username}`)} type="button" className="btn btn-primary btn-rounded ml-2">
+                  Message
+                  <FontAwesomeIcon size="sm" className="ml-2" icon={faPaperPlane}/>
+                </button>
+              </div>
               :
               <button onClick={(e: any) => handleFollow(userInfo?.pictureId || 1)} type="button" className="btn btn-primary btn-rounded ">
               Follow

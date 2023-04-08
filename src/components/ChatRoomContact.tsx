@@ -10,7 +10,7 @@ export default function ChatRoomContact(user: MinimalUserInfo) {
                         
                           <div className="chat-room-contact">
                             <div className="chat-contact-header">
-                              <img src={pictureServices.getPicture(user.pictureId || 1)} style={{width:"40px"}} alt="User" className=""/>
+                              <img src={pictureServices.getPicture(user.pictureId || 1)} style={{width:"36px"}} alt="User" className=""/>
                               <p className="fw-bold mb-0">{user.firstname} {user.lastname}</p>
                               
                             </div>
