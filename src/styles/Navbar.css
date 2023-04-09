@@ -79,9 +79,12 @@
     color: transparent;
   }
 
-  .search-group input:focus + .search-icon {
-    color: transparent;
+
+
+  .icon-hidden {
+    visibility: hidden;
   }
+
 
 .search-icon {
     position: relative;
