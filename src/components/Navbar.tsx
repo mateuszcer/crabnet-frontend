@@ -23,7 +23,7 @@ export default function Navbar() {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         navigate("/search/" + pattern)
-        navigate(0)
+        
         
     }
 

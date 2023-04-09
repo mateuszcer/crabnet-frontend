@@ -7,17 +7,16 @@ import MinimalUserInfoDefault from '../types/MinimalUserInfoDefault'
 import Chat from './Chat'
 import ChatRoomContact from './ChatRoomContact'
 import Navbar from './Navbar'
-import ErrorPage from './ErrorPage'
 import EmptyChatPage from './EmptyChatPage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft, faArrowLeft, faArrowRight, faBars, faClose } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import Loading from './Loading'
 export default function ChatRoom() {
     const {username} = useParams()
     const [currentUser, setCurrentUser] = useState<MinimalUserInfo>(MinimalUserInfoDefault)
     const [showChat, setShowChat] = useState<boolean>(false)
     const [showContacts, setShowContacts] = useState<boolean>(false)
-    const [transitionend, setTransitionend] = useState<boolean>(false)
+    
     
     useEffect(() => {
       const following = userServices.getFollowing()
@@ -46,7 +45,7 @@ export default function ChatRoom() {
         <div className="row chat-wrapper">
      
               <div className="chat-container">
-                  <div onTransitionEnd={(e: any) => setTransitionend(!showContacts)} data-mdb-perfect-scrollbar="true" className={showContacts ? "chat-room-contacts contacts-visible" : "chat-room-contacts hidden-room-contacts"}>
+                  <div data-mdb-perfect-scrollbar="true" className={showContacts ? "chat-room-contacts contacts-visible" : "chat-room-contacts hidden-room-contacts"}>
                     
                     <div className="contact-header">
                         <h5>{showContacts && "Chats"}</h5>
@@ -77,8 +76,12 @@ export default function ChatRoom() {
       </div>
       :
       <>
-      <Loading/>
-      {!userServices.getFollowing().length && <EmptyChatPage/>}
+      
+      {!userServices.getFollowing().length ? 
+      <EmptyChatPage/>
+    :
+    <Loading/>
+    }
       
       </>
 
