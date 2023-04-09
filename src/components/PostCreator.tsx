@@ -39,7 +39,7 @@ export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, 
                         <div className="tab-content" id="myTabContent">
                                 <div className="form-group">
                                     <label className="sr-only" htmlFor="message">post</label>
-                                    <textarea className="form-control" id="message" rows={3} placeholder="What are you thinking?" onInput={e => handleInput(e)}></textarea>
+                                    <textarea required className="form-control" id="message" rows={3} placeholder="What are you thinking?" onInput={e => handleInput(e)}></textarea>
                                 </div>
                         </div>
                         <div className="btn-toolbar justify-content-between">

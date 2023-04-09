@@ -25,7 +25,12 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/login" element={<LoginPage />}/>
-        <Route path="/chat" element={<ChatRoom />}/>
+        <Route path="/chat" element={
+        <RequireAuth>
+          <ChatRoom />
+        </RequireAuth>
+        
+        }/>
         
         <Route path="/signup/confirm" element={<ConfirmSignup/>}/>
         <Route path="/signup" element={<RegisterPage/>}/>

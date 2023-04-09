@@ -70,6 +70,30 @@
     
 }
 
+.search-group {
+    display: flex;
+    align-items: center;
+}
+
+.search-group input:focus::placeholder {
+    color: transparent;
+  }
+
+  .search-group input:focus + .search-icon {
+    color: transparent;
+  }
+
+.search-icon {
+    position: relative;
+    left: 23px;
+    z-index: 1;
+    
+    margin: 0px;
+    padding: 0px;
+    color: #676b74cd;
+    font-size: .9rem;
+}
+
 .brand-container {
     
     display: flex;
@@ -79,7 +103,7 @@
 
 .chat-room-icon {
     margin: 0px 20px 0px 0px;
-    font-size: 1.55rem;
+    font-size: 1.52rem;
     color: rgba(0, 105, 217, 0.688)  ;
     /* border: 1px solid rgba(125, 125, 125, 0.5); */
     border-radius: 100px;

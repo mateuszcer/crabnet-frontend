@@ -41,7 +41,7 @@ function RegisterPage() {
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="form-group mt-3">
             <label>Email address</label>
-            <input
+            <input required
               type="email"
               className="form-control mt-1"
               placeholder="Enter email"
@@ -49,7 +49,7 @@ function RegisterPage() {
           </div>
           <div className="form-group mt-1">
             <label>Username</label>
-            <input
+            <input required
               type="text"
               className="form-control mt-1"
               placeholder="Enter username"
@@ -59,7 +59,7 @@ function RegisterPage() {
 
           <div className="form-group col-md mb-3">
             <label>Firstname</label>
-            <input
+            <input required
               type="text"
               className="form-control mt-1"
               placeholder="Enter firstname"
@@ -67,7 +67,7 @@ function RegisterPage() {
           </div>
           <div className="form-group col-md-6 mb-3">
             <label>Lastname</label>
-            <input
+            <input required
               type="text"
               className="form-control mt-1"
               placeholder="Enter lastname"
@@ -76,7 +76,7 @@ function RegisterPage() {
               </div>
           <div className="form-group mt-1">
             <label>Password</label>
-            <input
+            <input required
               type="password"
               className="form-control mt-1"
               placeholder="Enter password"
@@ -107,7 +107,7 @@ function RegisterPage() {
           
 
           <p className="forgot-password text-right mt-2">
-            Already <a href="#" onClick={e => navigate("/login")}>registered</a>
+            Already <b className="login-link" onClick={e => navigate("/login")}>registered</b>
           </p>
         </div>
       </form>

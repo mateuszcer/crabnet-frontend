@@ -26,6 +26,12 @@ App {
     border-radius: 8px;
     background-color: white;
   }
+
+  .login-link {
+    color: #3B71CA;
+    font-weight: 500;
+    cursor: pointer;
+  }
   
   .Auth-form-content {
     padding-left: 12%;

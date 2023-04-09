@@ -101,7 +101,7 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
       
       </div>
       <form onSubmit={handleSubmit} className="chat-form">
-        <input value={message} className="form-control" onInput={(e: any) => setMessage(e.target.value)} placeholder="Type message"></input>
+        <input value={message} minLength={1} required className="form-control" onInput={(e: any) => setMessage(e.target.value)} placeholder="Type message"></input>
         <button className="btn "> 
         <FontAwesomeIcon color="#3B71CA" icon={faPaperPlane} />
         </button>

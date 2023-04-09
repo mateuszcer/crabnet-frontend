@@ -6,7 +6,7 @@ import authServices from '../services/auth.services'
 import userServices from '../services/user.services'
 import pictureServices from '../services/picture.services'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCog, faComments  } from '@fortawesome/free-solid-svg-icons'
+import { faCog, faComments, faSearch  } from '@fortawesome/free-solid-svg-icons'
 import Dropdown from 'react-bootstrap/Dropdown';
 import "../styles/Navbar.css"
 
@@ -35,9 +35,9 @@ export default function Navbar() {
           <div className="brand-container" >  
             <p className="h3 mr-4 mb-0 crabnet-logo" onClick={(e: any) => navigate("/dashboard")}><b className="text-danger">Crab</b><b>Net</b></p>
             <form className="form-inline nav-form mr-3" onSubmit={handleSubmit}>
-                <div className="input-group">
-                    <input placeholder="Search for users"  onInput={handleInput} type="search" className="form-control" aria-label="Search" />
-
+                <div className="input-group search-group">
+                    <FontAwesomeIcon className="search-icon" icon={faSearch} />
+                    <input placeholder="    Search for users"  onInput={handleInput} type="search" className="form-control" aria-label="Search" />
                 </div>
             </form>
           </div>

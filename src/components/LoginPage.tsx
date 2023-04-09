@@ -59,7 +59,7 @@ function LoginPage() {
             </button>
           </div>
           <p className="forgot-password text-right mt-2">
-            Create <a href="#" onClick={e => navigate("/signup")}>account</a>
+            Create <b onClick={e => navigate("/signup")} className="login-link">account</b>
           </p>
         </div>
       </form>

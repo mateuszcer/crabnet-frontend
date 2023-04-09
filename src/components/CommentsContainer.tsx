@@ -30,7 +30,7 @@ export default function CommentsContainer({comments: commentsArray, sourceId: po
         <div className="comment-creator">
             <img src={pictureServices.getSelfPicture()} width="35px"></img>
             <form className="comment-creator-form" onSubmit={createComment}>
-                <input value={content} type="text" id="addANote" onInput={(e: any) => setContent(e.target.value)} className="form-control" placeholder="Type comment..." />
+                <input required value={content} type="text" id="addANote" onInput={(e: any) => setContent(e.target.value)} className="form-control" placeholder="Type comment..." />
             </form>
            
         </div>
