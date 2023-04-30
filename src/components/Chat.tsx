@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs'
@@ -15,6 +15,9 @@ import ChatMessageDefault from '../types/ChatMessageDefault';
 import Loading from './Loading';
 import { API } from '../services/api_url';
 import timeUtils from '../utils/time.utils';
+import { SocketContext } from '../context/SocketContext';
+import { useSocketContext } from '../hooks/useSocketContext';
+import { useSocketConnect } from '../hooks/useSocketConnect';
 
 
 export default function Chat({username, firstname, lastname, pictureId}: MinimalUserInfo) {
@@ -23,27 +26,26 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
   const [stompClient, setStompClient] = useState<any>();
   const [serverMessage ,setServerMessage] = useState<ChatMessage>(ChatMessageDefault)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  
+  const {client} = useSocketContext()
+  const {subscribe} = useSocketConnect()
+  const [subscription, setSubscription] = useState<Stomp.Subscription>()
   const navigate = useNavigate()
+
   const showMessage = (message: ChatMessage) => {
     
     setServerMessage(message)
     
   }
+
     const connect = () => {
-        let token = tokenServices.getToken();
-        let socket = SockJS(API + "/chat?access_token=" + token);
-        let xstompClient = Stomp.over(socket);
+          const sub = subscribe('/user/queue/chat.message', function (messageRes: any) {
+             showMessage(JSON.parse(messageRes.body))
+          })
+
+          setSubscription(sub)
         
-        xstompClient.connect({}, function (frame: any) {
-        
-          xstompClient.subscribe('/user/queue/chat.message', function (messageRes: any) {
-            showMessage(JSON.parse(messageRes.body))
-          });
-        });
-        setStompClient(xstompClient)
-        
-        
+        setStompClient(client)
+             
       }
        
        function sendName() {
@@ -56,8 +58,20 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
        useEffect(() => {
         
         connect();
+
+ 
+
         
        }, [])
+
+       useEffect(() => {
+
+        return () => {
+          
+          subscription?.unsubscribe()
+        }
+
+       }, [subscription])
       
        useEffect(() => {
         const getMessages = async () => {

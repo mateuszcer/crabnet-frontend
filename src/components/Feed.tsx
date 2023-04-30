@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import userServices from "../services/user.services";
 import '../styles/Dashboard.css'
 import User from "../types/UserInfo";
@@ -8,20 +8,18 @@ import UserPost from "./UserPost";
 import PostInfo from "../types/PostInfo";
 import { useLogout } from "../hooks/useLogout";
 import userPostServices from "../services/userPost.services";
-import pictureServices from "../services/picture.services";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCodeBranch, faBug} from "@fortawesome/free-solid-svg-icons";
+import { faBug} from "@fortawesome/free-solid-svg-icons";
 import Loading from "./Loading";
 import ChatList from "./ChatList";
 import timeUtils from "../utils/time.utils";
+import { SocketContext } from "../context/SocketContext";
 
 export default function Feed() {
 
-    const [userInfo, setUserInfo] = useState<User>();
     const {logout} = useLogout()
     const [posts, setPosts] = useState<Array<PostInfo>>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true)
-   
 
     useEffect(() => {
         const getUserInfo = async () => {
