@@ -5,21 +5,17 @@ import tokenServices from "../services/token.services"
 import SockJS from "sockjs-client"
 import { API } from "../services/api_url"
 import Stomp from 'stompjs'
-import ChatMessage from "../types/ChatMessage"
-import ChatMessageDefault from "../types/ChatMessageDefault"
 
 export const useSocketConnect = () => {
     
-    const [isConnected, setIsConnected] = useState<boolean>(false)
     const {client, dispatch} = useSocketContext()
-    const [recMessage, setRecMessage] = useState<ChatMessage>(ChatMessageDefault)
-
-    const token = tokenServices.getToken();
-    const socket = SockJS(API + "/chat?access_token=" + token);
-
-
+    const [isConnected, setIsConnected] = useState<boolean>((client && client.connected) || false)
     const connect = () => {
+        const token = tokenServices.getToken();
+        const socket = SockJS(API + "/chat?access_token=" + token);
+
         const new_client = Stomp.over(socket)
+        console.log("wtf")
         
         new_client.connect({}, () => {
             dispatch({type: 'CONNECT', payload: new_client})
@@ -39,5 +35,5 @@ export const useSocketConnect = () => {
         return sub
     }
 
-    return { connect, subscribe, isConnected, recMessage}
+    return { connect, subscribe, isConnected}
 }

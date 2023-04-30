@@ -8,7 +8,7 @@ import Loading from "./Loading";
 const RequireAuth: FC<{ children: React.ReactElement }> = ({ children }) => {
     const userIsLogged = AuthService.isLogged(); 
       const {connect, isConnected} = useSocketConnect()
-
+      
       if(!isConnected) {
          connect()
       }

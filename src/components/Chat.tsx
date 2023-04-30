@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import SockJS from 'sockjs-client';
 import Stomp from 'stompjs'
 import chatMessagesServices from '../services/chatMessages.services';
 import pictureServices from '../services/picture.services';
-import tokenServices from '../services/token.services';
 import ChatMessage from '../types/ChatMessage';
 import UserMessage from './UserMessage';
 import "../styles/ChatRoom.css"
@@ -13,9 +11,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import MinimalUserInfo from '../types/MinimalUserInfo';
 import ChatMessageDefault from '../types/ChatMessageDefault';
 import Loading from './Loading';
-import { API } from '../services/api_url';
 import timeUtils from '../utils/time.utils';
-import { SocketContext } from '../context/SocketContext';
 import { useSocketContext } from '../hooks/useSocketContext';
 import { useSocketConnect } from '../hooks/useSocketConnect';
 
@@ -58,9 +54,6 @@ export default function Chat({username, firstname, lastname, pictureId}: Minimal
        useEffect(() => {
         
         connect();
-
- 
-
         
        }, [])
 
