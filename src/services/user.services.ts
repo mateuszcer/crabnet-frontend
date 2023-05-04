@@ -10,6 +10,7 @@ const UNFOLLOW_ENDPOINT = API_URL + "/unfollow";
 const ALL_USER_PATTERN_ENDPOINT = API_URL + "/all/";
 const BIO_ENDPOINT = API_URL + "/bio"
 const PICTURE_ENDPOINT = API_URL + "/picture"
+const NEW_USERS_ENDPOINT = API_URL + "/new"
 
 class UserServices {
     async getSelfInfo() {
@@ -25,12 +26,21 @@ class UserServices {
             
     }
 
+
+    async getNewUsers() {
+        return axios
+        .get(NEW_USERS_ENDPOINT, {headers: {'Authorization': `Bearer ${TokenService.getToken()}`}})
+        .then(response => response)
+        .catch(error => error.response)
+    }
+
+
     isFollowed(username: string) {
-        return this.getFollowing().some((follower: MinimalUserInfo) => Object.values(follower).includes(username))
+        return this.getFollowing().some((follower: MinimalUserInfo) => follower.username == username)
     }
 
     isFollowing(username: string) {
-        return this.getFollowers().some((follower: MinimalUserInfo) => Object.values(follower).includes(username))
+        return this.getFollowers().some((follower: MinimalUserInfo) => follower.username == username)
     }
 
     getFollowers() {

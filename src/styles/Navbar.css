@@ -16,6 +16,7 @@
 .profile-picture {
     cursor: pointer;
     transition: scale 0.2s;
+    margin: 0px 3px 0px 3px;
 }
 
 @media screen and (max-width: 500px) {    .nav-profile-picture { display: none; } }
@@ -49,7 +50,7 @@
     top: 0;
     width: 100vw;
     z-index: 10;
-    padding: 6px;
+    height: 70px;
 }
 
 .navbar-container {
@@ -57,6 +58,7 @@
     width: 100%;
     justify-content: space-between;
     z-index: 10;
+    
 }
 
 .crabnet-logo {
@@ -73,6 +75,14 @@
 .search-group {
     display: flex;
     align-items: center;
+    margin-right: 10px;
+}
+
+.search-group input {
+    border: none;
+    background-color: rgb(232, 232, 232);
+    border-radius: 30px !important;
+    
 }
 
 .search-group input:focus::placeholder {
@@ -88,13 +98,14 @@
 
 .search-icon {
     position: relative;
-    left: 23px;
+    left: 26px;
     z-index: 1;
     
     margin: 0px;
     padding: 0px;
-    color: #676b74cd;
+    color: #75777dcd;
     font-size: .9rem;
+    
 }
 
 .brand-container {
@@ -105,7 +116,7 @@
 }
 
 .chat-room-icon {
-    margin: 0px 20px 0px 0px;
+    margin: 0px 0px 0px 0px;
     font-size: 1.52rem;
     color: rgba(0, 105, 217, 0.688)  ;
     /* border: 1px solid rgba(125, 125, 125, 0.5); */

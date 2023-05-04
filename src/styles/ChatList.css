@@ -1,17 +1,64 @@
-.chat-contacts {
+.contacts-container {
+    
     display: flex;
     flex-direction: column;
     background-color: white;
-    margin-bottom: 20px;
+
+    align-items: start;
+    justify-content: start;
+    padding: 10px 5px 0px 5px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    margin: 3px 7px 0px 10px;
+}
+
+.chat-contacts {
+    display: flex;
+    flex-direction: column;
+    
+    margin-bottom: 15px;
+    
+
+    
     
 }
 
-.chat-contacts .follower-row {
-    z-index: 1;
-    height: 50px;
-    background-color: white;
-    transition: background-color .2s;
+.contacts-header {
+    width: 100% ;
+    display: flex;
+    align-items: center;
+}
+
+.contacts-header p{
     
+    margin: 1px 0px 1px 8px;
+    font-size: .92rem;
+    font-weight: 500;
+    color: #4c4e4fe1;
+}
+
+
+
+.contact-row {
+    z-index: 1;
+    transition: background-color .2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 10px 10px;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.contact-row:hover {
+    background-color: rgb(246, 245, 245);
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .chat-contacts .follower-row:hover {
@@ -31,4 +78,16 @@
 .chat-contacts .follower-row  h5{
     font-size: .93rem;
     color: #292b2c ;
+}
+
+.contact-row img{
+    width: 34px;
+
+}
+
+.contact-row h5{
+    font-size: .87rem;
+    font-weight: 400;
+    margin: 0px 0px 0px 9px;
+    color:  #292b2ce2;
 }

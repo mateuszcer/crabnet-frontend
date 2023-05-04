@@ -14,22 +14,31 @@ import Loading from "./Loading";
 import ChatList from "./ChatList";
 import timeUtils from "../utils/time.utils";
 import { SocketContext } from "../context/SocketContext";
+import MinimalUserInfo from "../types/MinimalUserInfo";
+import pictureServices from "../services/picture.services";
+import NewUser from "./NewUser";
+import { useAuthContext } from "../hooks/useAuthContext";
+import authServices from "../services/auth.services";
 
 export default function Feed() {
 
     const {logout} = useLogout()
     const [posts, setPosts] = useState<Array<PostInfo>>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [newUsers, setNewUsers] = useState<Array<MinimalUserInfo>>()
+    const {state} = useAuthContext()
+    const [contacts, setContacts] = useState<Array<MinimalUserInfo>>([])
 
     useEffect(() => {
         const getUserInfo = async () => {
           
           const following = userServices.getFollowing()
+          setContacts(following)
           const fetchedPosts: Array<Array<PostInfo>> = []
             for(const user of following) {
                 const username = user.username
                 const res = await userPostServices.getNewestPosts(username)
-
+                
                 if(res.status == 200) {
                     fetchedPosts.push(res.data)
                 }
@@ -40,6 +49,10 @@ export default function Feed() {
             fetchedPosts.push(userServices.getSelfPosts())
             const postsToRender = fetchedPosts.flat().sort(timeUtils.compareObjectWithDate)
             setPosts(postsToRender)
+            const new_users_res = await userServices.getNewUsers()
+            const new_users = new_users_res.data.filter((u : MinimalUserInfo) => {
+                return !userServices.isFollowed(u.username) && u.username != authServices.getUsername()})
+            setNewUsers(new_users)
             setIsLoading(false)
           
         } 
@@ -53,44 +66,32 @@ export default function Feed() {
             <Loading/>
             :
 
-
-    <div className="container gedf-wrapper main-container">
-        <div className="row">
+    <div className="dashboard-container">
+        
             <UserCard/>
-            <div className="col-md-6 mt-4 gedf-main">
+            <div className="feed-posts-container">
 
             
                 <PostCreator posts={posts || []} setPosts={setPosts}/>
-                
-                {posts?.map(post => <UserPost key={post.id} {...post}/>)}
+                <div className="dashboard-posts">
+                    {posts?.map(post => <UserPost key={post.id} {...post}/>)}
+                </div>
             </div>
             
-            <div className="col-md-3 mt-3">
-                <ChatList followers={userServices.getFollowing() || []}/>
+            <div className="new-users-container">
+                <div className="new-users-header">
+                    <h5>New users</h5>
 
-                <div className="card gedf-card">
-                    <div className="card-body">
-                        <h5 className="card-title">CrabNet is open source</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">Become co-author</h6>
-                        <p className="card-text">You can contribute to both the frontend and the backend codebases</p>
-                        <a target="_blank" href="https://github.com/mateuszcer/crabnet-frontend" className="card-link">Frontend</a>
-                        <a target="_blank" href="https://github.com/mateuszcer/crabnet-backend" className="card-link">Backend</a>
-                    </div>
                 </div>
-                <div className="card gedf-card mt-3">
-                        <div className="card-body">
-                            <h5 className="card-title">Report bug</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">Help us improve</h6>
-                            <p className="card-text">If you encounter a bug or unexpected behavior, you can create a GitHub issue and provide a 
-                            brief description of what happened.</p>
-                            <a target="_blank" href="https://github.com/mateuszcer/crabnet-frontend/issues" className="card-link">Report an issue
-                            <FontAwesomeIcon  className="link-icon" icon={faBug}/>
-                            </a>
-                            
-                        </div>
-                    </div>
+                {newUsers?.map(u => 
+                
+                <NewUser user={u} dispatch={setContacts} contacts={contacts}></NewUser>
+                )}
+
             </div>
-        </div>
+            <ChatList followers={contacts || []}/>
+            
+            
     </div>
     }
     </div>

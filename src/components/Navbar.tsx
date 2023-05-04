@@ -34,10 +34,10 @@ export default function Navbar() {
         <div className="navbar-container">
           <div className="brand-container" >  
             <p className="h3 mr-4 mb-0 crabnet-logo" onClick={(e: any) => navigate("/dashboard")}><b className="text-danger">Crab</b><b>Net</b></p>
-            <form className="form-inline nav-form mr-3" onSubmit={handleSubmit}>
+            <form className="" onSubmit={handleSubmit}>
                 <div className="input-group search-group">
                     <FontAwesomeIcon className={pattern ? "search-icon icon-hidden" : "search-icon"} icon={faSearch} />
-                    <input placeholder="    Search for users"  onInput={handleInput} type="search" className="form-control" aria-label="Search" />
+                    <input placeholder="      Search for users"  onInput={handleInput} type="search" className="form-control" aria-label="Search" />
                 </div>
             </form>
           </div>
@@ -45,27 +45,24 @@ export default function Navbar() {
           <div className="navbar-controls">
             <FontAwesomeIcon icon={faComments} className="chat-room-icon" onClick={(e: any) => navigate("/chat/")}/>
 
-           
-
-            <div className="mr-3 nav-profile-picture">
-                <img onClick={(e: any) => navigate(profileUrl)} 
-      src={pictureServices.getSelfPicture()}
-                  className="rounded-circle profile-picture" style={{width: "45px"}} />
-            </div>
-
             <div>
             
-                        <Dropdown>
-              <Dropdown.Toggle style={{border: "none", backgroundColor: "white", borderRadius: "100px"}} variant="secondary" >
-              <FontAwesomeIcon className="settings" size="lg" color="#332D2D" icon={faCog}/>
-              </Dropdown.Toggle>
+                      <Dropdown>
+                          <Dropdown.Toggle style={{border: "none", backgroundColor: "white", borderRadius: "100px"}} variant="secondary" >
+                          <FontAwesomeIcon className="settings" size="lg" color="#332D2D" icon={faCog}/>
+                          </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={e => logout()}>Logout</Dropdown.Item>
-                <Dropdown.Item onClick={e => navigate(profileUrl)}>Profile</Dropdown.Item>
-              </Dropdown.Menu>
-                </Dropdown>
+                          <Dropdown.Menu>
+                            <Dropdown.Item onClick={e => logout()}>Logout</Dropdown.Item>
+                            <Dropdown.Item onClick={e => navigate(profileUrl)}>Profile</Dropdown.Item>
+                          </Dropdown.Menu>
+                      </Dropdown>
               </div>
+              <div className="nav-profile-picture">
+                <img onClick={(e: any) => navigate(profileUrl)} 
+                  src={pictureServices.getSelfPicture()}
+                  className="rounded-circle profile-picture" style={{width: "42px"}} />
+            </div>
           </div>
         </div>
     </nav>

@@ -14,7 +14,6 @@ export const socketReducer = (state: any, action: any) => {
         case 'CREATE': 
             return action.payload
         case 'CONNECT':
-            console.log(action)
             return action.payload
         case 'SUBSCRIBE':
             return action.payload

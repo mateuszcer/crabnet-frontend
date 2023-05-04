@@ -8,9 +8,11 @@ import MinimalUserInfo from '../types/MinimalUserInfo'
 export default function ContactRow(user: MinimalUserInfo) {
     const navigate = useNavigate()
   return (
-    <div className="card-body text-center follower-row" onClick={(e: any) => navigate(`/chat/${user.username}`,)}>
-        <img src={pictureServices.getPicture(user.pictureId || 1)}  alt="User" className=""/>
-        <h5 className="card-title">{user.firstname} {user.lastname}</h5>
+    <div className="contact-row" onClick={(e: any) => navigate(`/chat/${user.username}`,)}>
+        <div className="contact-info">
+          <img src={pictureServices.getPicture(user.pictureId || 1)}  alt="User" className=""/>
+          <h5 className="">{user.firstname} {user.lastname}</h5>
+        </div>
         <FontAwesomeIcon className="message-icon" icon={faMessage}/>
       </div>
   )

@@ -1,17 +1,11 @@
-import { useState } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
-import reactLogo from './assets/react.svg'
-//import './App.css'
-import AuthService from './services/auth.services'
 import LoginPage from './components/LoginPage'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import Users from './components/Users'
+import { Route, Routes } from 'react-router-dom'
 import RequireAuth from './components/RequireAuth'
 import Dashboard from './components/Dashboard'
 import UserProfile from './components/UserProfile'
 import RegisterPage from './components/RegisterPage'
 import ConfirmSignup from './components/ConfirmSignup'
-import UserSearchCard from './components/UserSearchCard'
 import Search from './components/Search'
 import "./styles/Global.css"
 import PostPage from './components/PostPage'

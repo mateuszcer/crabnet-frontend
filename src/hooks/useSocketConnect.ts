@@ -13,15 +13,17 @@ export const useSocketConnect = () => {
     const connect = () => {
         const token = tokenServices.getToken();
         const socket = SockJS(API + "/chat?access_token=" + token);
-
+    
         const new_client = Stomp.over(socket)
-        console.log("wtf")
+            
         
         new_client.connect({}, () => {
             dispatch({type: 'CONNECT', payload: new_client})
             setIsConnected(true)
             
-        })
+        }, (err) => setIsConnected(true))
+
+        
     }
 
     const subscribe = (endpoint: string, callback: (message: Message) => any) => {

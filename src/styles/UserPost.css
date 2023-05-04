@@ -3,11 +3,64 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+}
+
+.post-header {
+    
+    padding: 15px 10px 5px 10px;
+    
+    
+}
+
+.following-indicator {
+    font-size: .7rem;
+    font-weight: 300;
+    color: rgb(100, 100, 100);
+    margin-left: 4px;
+
+}
+
+.post-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.post-options {
+    background-color: rgb(243, 243, 243);
+    border-radius: 75px;
+    border: none;
+    
+    
+}
+
+.post-content {
+    margin: 10px 10px 20px 10px;
+    color: #332d2dea;
+}
+
+.post-author-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin-left: 2px;
 }
 
 .post {
     margin-top: 10px;
-    max-width: 800px;
+    max-width: 850px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    width: 100%;
+    padding: 6px 0px 10px 0px;
+}
+
+.post-creator-header {
+    background-color: rgb(252, 252, 252);
 }
 
 .post-page {
@@ -22,6 +75,10 @@
     width: 100%;
 }
 
+.clock-icon {
+    margin: 0px 4px 0px 0px;
+}
+
 .post-footer-action {
     
     display: flex;
@@ -33,7 +90,7 @@
 }
 
 .author-username {
-    font-size: 1.15rem;
+    font-size: 1.10rem;
 }
 
 
@@ -80,22 +137,19 @@
 }
 
 
-
-.post-info p{
-    margin: 0px 0px 0px 12px;
-    color: rgba(108, 117, 125, 0.864) ;
-    font-size: .89rem;
-}
-
 .time {
     
     display: flex;
     justify-content: start;
     align-items: center;
+    margin: 0px !important;
+    font-size: .73rem !important;
 }
 
-.time p {
-    margin: 0px 0px 0px 4px;
+.time {
+    margin: 0px 0px 0px 0px;
+    font-size: .63rem !important;
+    font-weight: 400;
 }
 
 .like-action {

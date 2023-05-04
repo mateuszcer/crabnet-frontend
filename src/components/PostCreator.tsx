@@ -1,10 +1,9 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import userPostServices from '../services/userPost.services'
 import PostInfo from '../types/PostInfo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-
+import { faPaperPlane, faPen } from '@fortawesome/free-solid-svg-icons'
+import "../styles/PostCreator.css"
 export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, setPosts: React.Dispatch<Array<PostInfo>> }) {
     const [postContent, setPostContent] = useState("")
     const [error, setError] = useState("")
@@ -25,11 +24,13 @@ export default function PostCreator({posts, setPosts}: {posts: Array<PostInfo>, 
     }
 
   return (
-    <div className="card gedf-card">
-                    <div className="card-header">
+    <div className="post-creator">
+                    <div className="card-header post-creator-header">
                         <ul className="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                            <li className="nav-item">
-                                <a className="nav-link active" id="posts-tab" data-toggle="tab" href="#" role="tab" aria-controls="posts" aria-selected="true"> Create post</a>
+                            <li className="nav-item">      
+                                <p className="nav-link active" > 
+                                <FontAwesomeIcon className="post-pen" icon={faPen} />
+                                Create post</p>
                             </li>
                         </ul>
                     </div>

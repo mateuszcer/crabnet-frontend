@@ -3,7 +3,7 @@ import pictureServices from '../services/picture.services'
 import "../styles/Dashboard.css"
 import PostInfo from '../types/PostInfo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsUp, faComment, faEllipsisH , faClock, faHeart} from '@fortawesome/free-solid-svg-icons'
+import { faComment, faEllipsisH , faClock, faHeart} from '@fortawesome/free-solid-svg-icons'
 import userPostServices from '../services/userPost.services'
 import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
@@ -74,20 +74,26 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
     
     {
         isVisible ?
-            <div className="card gedf-card post">
-                    <div className="card-header">
-                        <div className="card-header-container">
+            <div className="post">
+                    <div className="post-header">
+                        <div className="post-header-container">
                                 <div className="post-info">
                                     <div className="author-profile" onClick={e => navigate(`/profile/${authorUsername}`)}>
+                                        
                                     <div className="mr-2">
                                         <img className="rounded-circle" width="45" src={pictureServices.getPicture(authorPictureId)} alt=""/>
                                     </div>
+                                    
 
-                                    <div className="ml-2">
+                                    <div className="post-author-info">
                                         <div className="m-0 author-username">@{authorUsername}</div>
+                                        <p className="text-muted time"> 
+                                        <FontAwesomeIcon size="xs" className="clock-icon" icon={faClock} />
+                                        {timeUtils.formatPublishedTime(creationTime)}
+                                        </p>
                                         
                                     </div>
-
+                                    
                                     </div>
                                     {
                                     userServices.isFollowed(authorUsername) ?
@@ -96,11 +102,12 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
                                     </p>
                                     :
                                     <></>
-                                    }                                </div>
+                                    }
+                                    </div>
                                 <div>
 
                                     <Dropdown>
-                                        <Dropdown.Toggle style={{border: "none", backgroundColor: "transparent"}} variant="secondary" >
+                                        <Dropdown.Toggle className="post-options" variant="secondary" >
                                         <FontAwesomeIcon className="" size="lg" color="#332D2D" icon={faEllipsisH}/>
                                         </Dropdown.Toggle>
 
@@ -122,13 +129,10 @@ export default function UserPost({id, authorUsername, content, creationTime, lik
                         </div>
 
                     </div>
-                    <div className="card-body">
-                        <div className="text-muted h7 mb-2 time"> <FontAwesomeIcon size="xs" icon={faClock} /><p>{timeUtils.formatPublishedTime(creationTime)} </p></div>
-                
-                        <p className="card-text">
+                        <p className="post-content">
                             {content}
                         </p>
-                    </div>
+                    
                     <div className="post-footer">
                         <div className="counters">
                             <div className="like-counter">

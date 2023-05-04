@@ -23,7 +23,7 @@ export default function ChatRoom() {
       setShowContacts(false)
         if(username != undefined){
           
-          const user = following.find((user: MinimalUserInfo) => Object.values(user).includes(username))
+          const user = following.find((user: MinimalUserInfo) => user.username == username)
           setCurrentUser(user)
           setShowChat(true)
         }
